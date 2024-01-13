@@ -10,20 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install GitHub CLI
-        uses: actions/setup-gh@v0.6.0
-
-      - name: Run the script
+      - name: Create Pull Request
         run: |
           changedFiles=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^assets/')
           commitCount=$(git rev-list --count ${{ github.event.before }}..${{ github.sha }})
 
           if [[ $changedFiles -ge 10 || $commitCount -ge 10 ]]; then
             echo "Creating pull request..."
-            gh pr create --base app-prealpha --head logos --title "Automated Logos Pull Request" --body "Changed Files:\n$changedFiles\n\nCommits Count: $commitCount"
+            gh pr create -B app-prealpha -H logos --title "Automated Logos Pull Request" --body "Changed Files:\n$changedFiles\n\nCommits Count: $commitCount"
           else
             echo "Conditions not met. No pull request created."
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
