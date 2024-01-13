@@ -10,6 +10,7 @@ Los siguientes recursos no están verificados, descarga y ejecuta a tu propio ri
 - Adobe Illustrator 2024
   - [*Torrent](https://usersdrive.com/oe0qgpauwxvv.html) o [Descarga directa](https://usersdrive.com/djt0vk53ezj9.html)
 - [qBittorrent (herramienta para descargar torrents)](https://www.fosshub.com/qBittorrent.html)
+
 *Torrent permite resumir la descarga si se es interrumpida
 
 ## Instrucciones
