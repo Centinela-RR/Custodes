@@ -1,23 +1,19 @@
 # Custodes
 
-Aplicación para seguridad pública.
+Rama dedicada únicamente a la adición de recursos visuales, como logos, imágenes, videos, y cualquier cosa multimedia.
 
 ## Recursos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Los siguientes recursos no están verificados, descarga y ejecuta a tu propio riesgo; Centinela no se hace responsable por daños a tu computadora.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Adobe Photoshop 2024 - *Torrent únicamente](https://usersdrive.com/c82wqjmb8o20.html)
+- Adobe Illustrator 2024
+  - [*Torrent](https://usersdrive.com/oe0qgpauwxvv.html) o [Descarga directa](https://usersdrive.com/djt0vk53ezj9.html)
+- [qBittorrent (herramienta para descargar torrents)](https://www.fosshub.com/qBittorrent.html)
 
-## Componentes
-- Entorno de desarrollo: Flutter (holy shit this is annoying to install)
-  - iOS 17.0
-    - Componentes de desarrollo:
-      - Entorno de desarrollo: XCode
-      - Componente extra: CocoaPods
-  - Android
-    - Entorno de desarrollo: Android Studio
-- Base de datos: PostgreSQL
-- Entorno de colaboración: GitHub
+*Torrent permite resumir la descarga si se es interrumpida
+
+## Instrucciones
+- Dentro de la carpeta de [assets](/assets/), agregar archivos multimedia creados *__EN LAS DIMENSIONES CORRECTAS__*
+- Los nombres deberán tomar la siguiente forma: quees_altura x anchura.png, por ejemplo: logo_164x164.png o fondoPantalla_1024x1024.png
+- Una vez que hayan al menos 10 archivos subidos o 10 commits a la rama, hacer una _Pull Request_ (se debería hacer automáticamente) con base: 'app-prealpha', del lado derecho sería 'logos'
