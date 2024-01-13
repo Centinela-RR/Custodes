@@ -12,8 +12,11 @@ jobs:
     steps:
       - name: Create Pull Request
         run: |
-          changedFiles=$(git diff --name-only ${{ github.sha }}^ ${{ github.sha }} | grep '^assets/')
-          commitCount=$(git rev-list --count ${{ github.event.before }}..${{ github.sha }})
+          echo "Current commit SHA: ${GITHUB_SHA}"
+          changedFiles=$(git diff --name-only ${GITHUB_SHA}^ ${GITHUB_SHA} | grep '^assets/')
+          echo "Changed Files: ${changedFiles}"
+          commitCount=$(git rev-list --count ${GITHUB_EVENT_BEFORE}..${GITHUB_SHA})
+          echo "Commits Count: ${commitCount}"
 
           if [[ $changedFiles -ge 10 || $commitCount -ge 10 ]]; then
             echo "Creating pull request..."
@@ -23,3 +26,4 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
