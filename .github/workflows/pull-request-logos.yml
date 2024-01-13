@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install GitHub CLI
+        uses: actions/setup-gh@v0.6.0
       - name: Create Pull Request
         run: |
           echo "Current commit SHA: ${GITHUB_SHA}"
