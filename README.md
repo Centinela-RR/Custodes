@@ -17,3 +17,4 @@ Los siguientes recursos no están verificados, descarga y ejecuta a tu propio ri
 - Dentro de la carpeta de [assets](/assets/), agregar archivos multimedia creados *__EN LAS DIMENSIONES CORRECTAS__*
 - Los nombres deberán tomar la siguiente forma: quees_altura x anchura.png, por ejemplo: logo_164x164.png o fondoPantalla_1024x1024.png
 - Una vez que hayan al menos 10 archivos subidos o 10 commits a la rama, hacer una _Pull Request_ (se debería hacer automáticamente) con base: 'app-prealpha', del lado derecho sería 'logos'
+- En caso de que haya algún problema, mencionar a los desarrolladores en la descripción o en algún comentario (@Centinela-RR/dev) para resolverlo lo más pronto posible
