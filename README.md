@@ -4,8 +4,8 @@ Aplicación para seguridad pública.
 
 ## Recursos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Lab: Escribiendo la primer aplicación de Flutter](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Ejemplos útiles de Flutter](https://docs.flutter.dev/cookbook)
 - [No le sé a GitHub, qué hago?](https://github.com/Centinela-RR/Custodes/wiki/Inicio)
 
 For help getting started with Flutter development, view the
