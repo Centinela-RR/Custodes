@@ -7,10 +7,8 @@ Aplicación para seguridad pública.
 - [Lab: Escribiendo la primer aplicación de Flutter](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Ejemplos útiles de Flutter](https://docs.flutter.dev/cookbook)
 - [No le sé a GitHub, qué hago?](https://github.com/Centinela-RR/Custodes/wiki/Inicio)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Documentación de Flutter](https://docs.flutter.dev/), que ofrece tutoriales,
+muestras, orientación sobre desarrollo móvil y una referencia completa de la API.
 
 ## Componentes
 - Entorno de desarrollo: Flutter (holy shit this is annoying to install)
@@ -20,5 +18,5 @@ samples, guidance on mobile development, and a full API reference.
       - Componente extra: CocoaPods
   - Android
     - Entorno de desarrollo: Android Studio.
-- Base de datos: PostgreSQL
+- Base de datos: Firebase (temporalmente en PostgreSQL, hasta que sepamos correctamente sobre bases de datos con Flutter)
 - Entorno de colaboración: GitHub
