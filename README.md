@@ -18,6 +18,6 @@ samples, guidance on mobile development, and a full API reference.
       - Entorno de desarrollo: XCode
       - Componente extra: CocoaPods
   - Android
-    - Entorno de desarrollo: Android Studio.
+    - Entorno de desarrollo: Android Studio
 - Base de datos: PostgreSQL
 - Entorno de colaboración: GitHub
