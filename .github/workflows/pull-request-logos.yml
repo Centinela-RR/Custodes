@@ -9,7 +9,7 @@ jobs:
     steps:
       # Checkout the branch
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout
 
       - name: Setup git config
         run: |
@@ -20,9 +20,9 @@ jobs:
       - name: Check changed files and commit count
         #Debug print lol
         run: |
-          changedFiles=$(git diff --name-only ${GITHUB_SHA}^ ${GITHUB_SHA} | grep '^assets/')
+          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/')
           echo "Changed Files: ${changedFiles}"
-          commitCount=$(git rev-list --count ${GITHUB_EVENT_BEFORE}..${GITHUB_SHA})
+          commitCount=$(git rev-list --count HEAD^ HEAD)
           echo "Commits Count: ${commitCount}"
 
       - name: Create Pull Request
