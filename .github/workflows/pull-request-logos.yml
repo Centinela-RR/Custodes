@@ -43,6 +43,10 @@ jobs:
         with:
           name: my-artifacts
 
+      - name: Set GH_TOKEN for a pull requests
+        run: |
+          echo "GH_TOKEN=${{ github.token }}" >> $GITHUB_ENV
+
       - name: Create Pull Request
         run: |
           CHANGED_FILES=$(cat envFile1.txt)
