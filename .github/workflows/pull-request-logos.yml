@@ -25,17 +25,18 @@ jobs:
           echo "Commits Count: ${COMMIT_COUNT}"
 
           # Set outputs
-          echo "changedFiles=${CHANGED_FILES}" >> $GITHUB_ENV
-          echo "commitCount=${COMMIT_COUNT}" >> $GITHUB_ENV
+          echo "${CHANGED_FILES}" >> envFile1.txt
+          echo "${COMMIT_COUNT}" >> envFile2.txt
 
   create_pr:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Create Pull Request
         run: |
           echo "Environment Variables:"
+          CHANGED_FILES=$(cat envFile1.txt)
+          COMMIT_COUNT=$(cat envFile2.txt)
           echo "CHANGED_FILES: ${CHANGED_FILES}"
           echo "COMMIT_COUNT: ${COMMIT_COUNT}"
           baseBranch="logos"
