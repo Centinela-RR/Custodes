@@ -24,27 +24,33 @@ jobs:
           export COMMIT_COUNT=$(git rev-list --count HEAD^ HEAD)
           echo "Commits Count: ${COMMIT_COUNT}"
 
-          # Set outputs
-          echo "${CHANGED_FILES}" >> $GITHUB_WORKSPACE/envFile1.txt
-          echo "${COMMIT_COUNT}" >> $GITHUB_WORKSPACE/envFile2.txt
+          # Set outputs to files
+          echo "${CHANGED_FILES}" > envFile1.txt
+          echo "${COMMIT_COUNT}" > envFile2.txt
+
+      - name: Upload files as artifacts
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: my-artifacts
+          path: envFile*.txt
 
   create_pr:
     runs-on: ubuntu-latest
     needs: build
     steps:
     #Fr?
-      - name: Checkout again
-        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v3.0.2
         with:
-          # Fetch the entire history again
-          fetch-depth: 0
+          name: my-artifacts
+
       - name: Create Pull Request
         run: |
-          echo "Environment Variables:"
-          CHANGED_FILES=$(cat $GITHUB_WORKSPACE/envFile1.txt)
-          COMMIT_COUNT=$(cat $GITHUB_WORKSPACE/envFile2.txt)
+          CHANGED_FILES=$(cat envFile1.txt)
+          COMMIT_COUNT=$(cat envFile2.txt)
           echo "CHANGED_FILES: ${CHANGED_FILES}"
           echo "COMMIT_COUNT: ${COMMIT_COUNT}"
+          
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
           if [[ "${{ needs.build.outputs.CHANGED_FILES }}" == "No changes in assets folder" || -z "${{ needs.build.outputs.COMMIT_COUNT }}" ]]; then
