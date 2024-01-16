@@ -27,7 +27,8 @@ jobs:
           # Set outputs
           echo "changedFiles=${CHANGED_FILES}" >> $GITHUB_ENV
           echo "commitCount=${COMMIT_COUNT}" >> $GITHUB_ENV
-
+          # cuz yea?
+          echo $GITHUB_ENV
 
   create_pr:
     needs: build
@@ -36,6 +37,7 @@ jobs:
     steps:
       - name: Create Pull Request
         run: |
+          echo $GITHUB_ENV
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
           if [[ "${{ env.changedFiles }}" == "No changes in assets folder" || -z "${{ env.commitCount }}" ]]; then
