@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the branch
-      - name: checkout
-        uses: actions/checkout@v2
+      #- name: checkout
+      #  uses: actions/checkout@v2
 
       - name: Setup git config
         run: |
@@ -33,5 +33,5 @@ jobs:
           else
             echo "Conditions not met. No pull request created."
           fi
-        #env:
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
