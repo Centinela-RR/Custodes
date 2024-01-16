@@ -52,7 +52,7 @@ jobs:
           
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
-          if [[ "${CHANGED_FILES}" == "No changes in assets folder" || -z "${COMMIT_COUNT}" ]]; then
+          if [[ "${CHANGED_FILES}" == "No changes in assets folder" || ! -n "${COMMIT_COUNT}" ]]; then
             echo "Either CHANGED_FILES is 'No changes in assets folder' or COMMIT_COUNT is empty."
           elif [[ "${COMMIT_COUNT}" -ge 10 ]]; then
             echo "COMMIT_COUNT is greater than or equal to 10."
