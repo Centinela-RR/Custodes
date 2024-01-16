@@ -20,10 +20,10 @@ jobs:
       - name: Check changed files and commit count
         #Debug print lol
         run: |
-          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/')
-          commitCount=$(git rev-list --count HEAD^ HEAD)
-          echo changedFiles;
-          echo commitCount;
+          changedFiles=$(git diff --name-only ${GITHUB_SHA}^ ${GITHUB_SHA} | grep '^assets/')
+          echo "Changed Files: ${changedFiles}"
+          commitCount=$(git rev-list --count ${GITHUB_EVENT_BEFORE}..${GITHUB_SHA})
+          echo "Commits Count: ${commitCount}"
 
       - name: Create Pull Request
         run: |
