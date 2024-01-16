@@ -12,8 +12,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-        #Debug print lol
-        run: |
+
+      #Debug print lol
+      - run: |
+          git checkout HEAD^
           changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/')
           echo "Changed Files: ${changedFiles}"
           commitCount=$(git rev-list --count HEAD^ HEAD)
