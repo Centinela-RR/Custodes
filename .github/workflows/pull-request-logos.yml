@@ -24,10 +24,9 @@ jobs:
           export COMMIT_COUNT=$(git rev-list --count HEAD^ HEAD)
           echo "Commits Count: ${COMMIT_COUNT}"
 
-      - name: Set outputs
-        run: |
-          echo "changedFiles=${{ steps.check_changes.outputs.CHANGED_FILES }}" >> $GITHUB_ENV
-          echo "commitCount=${{ steps.check_changes.outputs.COMMIT_COUNT }}" >> $GITHUB_ENV
+          # Set outputs
+          echo "changedFiles=${CHANGED_FILES}" >> $GITHUB_ENV
+          echo "commitCount=${COMMIT_COUNT}" >> $GITHUB_ENV
 
 
   create_pr:
@@ -48,5 +47,3 @@ jobs:
           else
             echo "Conditions not met. No pull request created."
           fi
-
-
