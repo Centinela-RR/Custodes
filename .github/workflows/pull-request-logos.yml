@@ -38,6 +38,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Checkout - Get access to git repo stuff
+        uses: actions/checkout@v4
+
       - name: Download artifacts
         uses: actions/download-artifact@v3.0.2
         with:
