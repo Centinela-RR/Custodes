@@ -8,13 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the branch and get info
-      - name: checkout - Check changed files and commit count
+      - name: checkout - Get access to git repo stuff
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       #Debug print lol
-      - run: |
+      - name: Check changed files and commit count
+        run: |
           set -e  # Enable error handling
           changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || true)
           echo "Changed Files: ${changedFiles}"
