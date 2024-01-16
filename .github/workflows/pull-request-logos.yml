@@ -1,50 +1,44 @@
 name: Auto Pull Request
+
 on:
   push:
     branches:
       - logos
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    outputs:
-      id: vars
-      value:
-        changedFiles: ${{ steps.check_changes.outputs.changedFiles }}
-        commitCount: ${{ steps.check_changes.outputs.commitCount }}
-
     steps:
-      # Checkout the branch and get info
-      - name: checkout - Get access to git repo stuff
+      - name: Checkout - Get access to git repo stuff
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # As the name implies
       - name: Check changed files and commit count
+        id: check_changes
         run: |
-          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || echo "No changes in assets folder")
-          echo "Changed Files: ${changedFiles}"
-          commitCount=$(git rev-list --count HEAD^ HEAD)
-          echo "Commits Count: ${commitCount}"
+          export CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || echo "No changes in assets folder")
+          echo "Changed Files: ${CHANGED_FILES}"
 
-        # Set outputs to be used in the next steps
-        env:
-          changedFiles: ${{ changedFiles }}
-          commitCount: ${{ commitCount }}
-        shell: bash
+          export COMMIT_COUNT=$(git rev-list --count HEAD^ HEAD)
+          echo "Commits Count: ${COMMIT_COUNT}"
+
+      - name: Set outputs
+        run: echo "changedFiles=${{ env.CHANGED_FILES }}\ncommitCount=${{ env.COMMIT_COUNT }}" >> $GITHUB_ENV
 
   create_pr:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Create Pull Request
         run: |
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
-          if [[ "${{ needs.build.outputs.changedFiles }}" == "No changes in assets folder" || $(echo "${{ needs.build.outputs.changedFiles }}" | wc -l) -ge 10 || ${{ needs.build.outputs.commitCount }} -ge 10 ]]; then
+          if [[ "${{ needs.build.outputs.CHANGED_FILES }}" == "No changes in assets folder" || $(echo "${{ needs.build.outputs.CHANGED_FILES }}" | wc -l) -ge 10 || ${{ needs.build.outputs.COMMIT_COUNT }} -ge 10 ]]; then
             echo "Creating pull request..."
-            gh pr create -B $toMergeToBranch -H $baseBranch --title "Automated ${baseBranch} Pull Request" --body "Changed Files:\n${{ needs.build.outputs.changedFiles }}\n\nCommits Count: ${{ needs.build.outputs.commitCount }}"
+            gh pr create -B $toMergeToBranch -H $baseBranch --title "Automated ${baseBranch} Pull Request" --body "Changed Files:\n${{ needs.build.outputs.CHANGED_FILES }}\n\nCommits Count: ${{ needs.build.outputs.COMMIT_COUNT }}"
           else
             echo "Conditions not met. No pull request created."
           fi
