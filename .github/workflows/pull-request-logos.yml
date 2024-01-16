@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: setup git config
+        run: |
+          # setup the username and email
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
       - name: Create Pull Request
         run: |
           changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/')
@@ -21,5 +26,5 @@ jobs:
           else
             echo "Conditions not met. No pull request created."
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #env:
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
