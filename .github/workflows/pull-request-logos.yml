@@ -15,7 +15,8 @@ jobs:
 
       #Debug print lol
       - run: |
-          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/')
+          set -e  # Enable error handling
+          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || true)
           echo "Changed Files: ${changedFiles}"
           commitCount=$(git rev-list --count HEAD^ HEAD)
           echo "Commits Count: ${commitCount}"
