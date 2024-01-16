@@ -17,28 +17,18 @@ jobs:
       - name: Check changed files and commit count
         run: |
           set -e  # Enable error handling
-          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || true)
+          changedFiles=$(git diff --name-only HEAD^ HEAD | grep '^assets/' || echo "No changes in assets folder")
           echo "Changed Files: ${changedFiles}"
           commitCount=$(git rev-list --count HEAD^ HEAD)
           echo "Commits Count: ${commitCount}"
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
 
-      #What, why?
-      #- name: Setup git config
-      #  run: |
-          # setup the username and email
-      #    git config user.name "GitHub Actions Bot"
-      #    git config user.email "<>"
-
       - name: Create Pull Request
         run: |
-          if [[ -n "$changedFiles" && ($changedFiles -ge 10 || $commitCount -ge 10) ]]; then
+          if [[ "$changedFiles" == "No changes in assets folder" || $(echo "$changedFiles" | wc -l) -ge 10 || $commitCount -ge 10 ]]; then
             echo "Creating pull request..."
             gh pr create -B $toMergeToBranch -H $baseBranch --title "Automated ${baseBranch} Pull Request" --body "Changed Files:\n$changedFiles\n\nCommits Count: $commitCount"
           else
             echo "Conditions not met. No pull request created."
           fi
-          
-      - name: Echo mergeable PR number
-        run: echo ${{ steps.open_pr.outputs.pull_number }}
