@@ -52,12 +52,13 @@ jobs:
           
           baseBranch="logos"
           toMergeToBranch="app-prealpha"
+
           if [[ "${CHANGED_FILES}" == "No changes in assets folder" || ! -n "${COMMIT_COUNT}" ]]; then
             echo "Either CHANGED_FILES is 'No changes in assets folder' or COMMIT_COUNT is empty."
           elif [[ "${COMMIT_COUNT}" -ge 10 ]]; then
             echo "COMMIT_COUNT is greater than or equal to 10."
             echo "Creating pull request..."
-            gh pr create -B $toMergeToBranch -H $baseBranch --title "Automated ${baseBranch} Pull Request" --body "Changed Files:\n${CHANGED_FILES}"\n\nCommits Count: ${COMMIT_COUNT}"
+            gh pr create -B $toMergeToBranch -H $baseBranch --title "Automated ${baseBranch} Pull Request" --body "Changed Files:\n${CHANGED_FILES}\n\nCommits Count: ${COMMIT_COUNT}"
           else
             echo "Conditions not met. No pull request created."
           fi
