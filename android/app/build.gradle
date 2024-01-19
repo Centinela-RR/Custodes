@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.custodes"
+    namespace "com.centinela.custodes"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -65,3 +65,5 @@ flutter {
 }
 
 dependencies {}
+
+id 'com.google.gms.google-services'
