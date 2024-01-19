@@ -1,4 +1,4 @@
-name: Auto Pull Request
+name: Auto Pull Request logos->app_prealpha
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout - Get access to git repo stuff
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 11
 
       - name: Check changed files and commit count
         id: check_changes
@@ -27,20 +27,18 @@ jobs:
           echo "Commits Count: ${COMMIT_COUNT}"
 
           # Set outputs to files
-          echo "${CHANGED_FILES}" > envFile1.txt
-          echo "${COMMIT_COUNT}" > envFile2.txt
+          echo "${CHANGED_FILES}" > envFile-changedFiles.txt
+          echo "${COMMIT_COUNT}" > envFile-commitCount.txt
 
       - name: Upload files as artifacts
         uses: actions/upload-artifact@v3.1.3
         with:
           name: my-artifacts
-          path: envFile*.txt
+          path: envFile-*.txt
 
   create_pr:
     runs-on: ubuntu-latest
     needs: build
-
-    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request') == false
 
     steps:
       - name: Checkout - Get access to git repo stuff
@@ -57,8 +55,8 @@ jobs:
 
       - name: Create Pull Request
         run: |
-          CHANGED_FILES=$(cat envFile1.txt)
-          COMMIT_COUNT=$(cat envFile2.txt)
+          CHANGED_FILES=$(cat envFile-changedFiles.txt)
+          COMMIT_COUNT=$(cat envFile-commitCount.txt)
           echo "CHANGED_FILES: ${CHANGED_FILES}"
           echo "COMMIT_COUNT: ${COMMIT_COUNT}"
           
