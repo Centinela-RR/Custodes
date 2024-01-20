@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,6 +42,17 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: ***REMOVED***,
+    appId: ***REMOVED***,
+    messagingSenderId: ***REMOVED***,
+    projectId: ***REMOVED***,
+    authDomain: ***REMOVED***,
+    databaseURL: ***REMOVED***,
+    storageBucket: ***REMOVED***,
+    measurementId: ***REMOVED***,
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: ***REMOVED***,
@@ -66,5 +71,15 @@ class DefaultFirebaseOptions {
     databaseURL: ***REMOVED***,
     storageBucket: ***REMOVED***,
     iosBundleId: 'com.centinela.custodes',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: ***REMOVED***,
+    appId: '1:528581573998:ios:00894e0560ef728d00157f',
+    messagingSenderId: ***REMOVED***,
+    projectId: ***REMOVED***,
+    databaseURL: ***REMOVED***,
+    storageBucket: ***REMOVED***,
+    iosBundleId: 'com.example.custodes.RunnerTests',
   );
 }
