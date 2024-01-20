@@ -40,6 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request') == false
+
     steps:
       - name: Checkout - Get access to git repo stuff
         uses: actions/checkout@v4
