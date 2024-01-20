@@ -24,18 +24,6 @@ class DefaultFirebaseOptions {
         return android;
       case TargetPlatform.iOS:
         return ios;
-      case TargetPlatform.macOS:
-        return macos;
-      case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -71,15 +59,5 @@ class DefaultFirebaseOptions {
     databaseURL: ***REMOVED***,
     storageBucket: ***REMOVED***,
     iosBundleId: ***REMOVED***,
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: ***REMOVED***,
-    appId: '1:***REMOVED***:ios:00894e0560ef728d00157f',
-    messagingSenderId: ***REMOVED***,
-    projectId: ***REMOVED***,
-    databaseURL: ***REMOVED***,
-    storageBucket: ***REMOVED***,
-    iosBundleId: 'com.example.custodes.RunnerTests',
   );
 }
