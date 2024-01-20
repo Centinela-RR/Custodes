@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'modelo/db.dart';
+import '../modelo/db.dart';
 
 class DebugApp extends StatefulWidget {
   const DebugApp({super.key});
