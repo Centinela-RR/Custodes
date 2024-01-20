@@ -24,5 +24,5 @@ muestras, orientación sobre desarrollo móvil y una referencia completa de la A
       - Componente extra: CocoaPods
   - Android
     - Entorno de desarrollo: Android Studio.
-- Base de datos: Firebase (temporalmente en PostgreSQL, hasta que sepamos correctamente sobre bases de datos con Flutter)
+- Base de datos: Firebase - Cloud Firestore (o Realtime si nos salen problemas)
 - Entorno de colaboración: GitHub
