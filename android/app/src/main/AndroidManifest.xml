@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.centinela.custodes">
     <application
         android:label="Custodes"
         android:name="${applicationName}"
