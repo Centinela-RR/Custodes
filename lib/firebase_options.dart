@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,6 +42,17 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: ***REMOVED***,
+    appId: '1:528581573998:web:19ef5ed439e6d9bd00157f',
+    messagingSenderId: ***REMOVED***,
+    projectId: ***REMOVED***,
+    authDomain: 'custodes-97a6a.firebaseapp.com',
+    databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
+    storageBucket: 'custodes-97a6a.appspot.com',
+    measurementId: ***REMOVED***,
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: ***REMOVED***,
@@ -66,5 +71,15 @@ class DefaultFirebaseOptions {
     databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
     storageBucket: 'custodes-97a6a.appspot.com',
     iosBundleId: 'com.centinela.custodes',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: ***REMOVED***,
+    appId: '1:528581573998:ios:00894e0560ef728d00157f',
+    messagingSenderId: ***REMOVED***,
+    projectId: ***REMOVED***,
+    databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
+    storageBucket: 'custodes-97a6a.appspot.com',
+    iosBundleId: 'com.example.custodes.RunnerTests',
   );
 }
