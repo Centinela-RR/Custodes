@@ -25,13 +25,14 @@ class DebugAppState extends State<DebugApp> {
             onPressed: () async {
               // Your Firebase connection test logic here:
               // When the button is pressed, call the function fetchElement
-              fb.fetchElement();
+              //fb.fetchElement();
               // For a demo on playing with Flutter, 
               // we'll change the button text
               setState(() {
-                buttonText = buttonText == 'Sugma'
+                buttonText = fb.generateLocalIdentifier();
+                /*buttonText = buttonText == 'Sugma'
                     ? 'BALLS'
-                    : 'Sugma';
+                    : 'Sugma';*/
                 
               });
             },
