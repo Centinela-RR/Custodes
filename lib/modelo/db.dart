@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class FirebaseConnection {
   final db = FirebaseFirestore.instance;
@@ -27,4 +29,19 @@ class FirebaseConnection {
       }
     });
   }
+
+String generateLocalIdentifier() {
+  const uuid = Uuid();
+  return uuid.v4();
+}
+
+Future<void> storeLocalIdentifier(String localIdentifier) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('localIdentifier', localIdentifier);
+}
+
+Future<String?> getLocalIdentifier() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('localIdentifier');
+}
 }
