@@ -1,6 +1,6 @@
 import 'package:custodes/vista/debug.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'modelo/firebase_options.dart';
 import 'package:flutter/material.dart';
 /*import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
