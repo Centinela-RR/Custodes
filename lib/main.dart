@@ -2,8 +2,7 @@ import 'package:custodes/vista/debug.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'dart:io';
+/*import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:baseflow_plugin_template/baseflow_plugin_template.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
@@ -19,7 +18,7 @@ export 'package:permission_handler_platform_interface/permission_handler_platfor
     ServiceStatusGetters,
     FutureServiceStatusGetters;
 
-PermissionHandlerPlatform get _handler => PermissionHandlerPlatform.instance;
+PermissionHandlerPlatform get _handler => PermissionHandlerPlatform.instance;*/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,8 +27,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Run the app
-  runApp(DebugApp());
+  runApp(const DebugApp());
 }
+/*
 ///Defines the main theme color
 final MaterialColor themeMaterialColor =
 BaseflowPluginExample.createMaterialColor(
@@ -37,10 +37,12 @@ BaseflowPluginExample.createMaterialColor(
 
 /// A Flutter application demonstrating the functionality of this plugin
 class PermissionHandlerWidget extends StatefulWidget {
+  const PermissionHandlerWidget({super.key});
+
   /// Create a page containing the functionality of this plugin
   static ExamplePage createPage() {
     return ExamplePage(
-        Icons.location_on, (context) => PermissionHandlerWidget());
+        Icons.location_on, (context) => const PermissionHandlerWidget());
   }
 
   @override
@@ -94,7 +96,7 @@ class _PermissionHandlerWidgetState extends State<PermissionHandlerWidget> {
 /// Permission widget containing information about the passed [Permission]
 class PermissionWidget extends StatefulWidget {
   /// Constructs a [PermissionWidget] for the supplied [Permission]
-  const PermissionWidget(this._permission);
+  const PermissionWidget(this._permission, {super.key});
 
   final Permission _permission;
 
@@ -152,7 +154,7 @@ class _PermissionState extends State<PermissionWidget> {
           ),
           onPressed: () {
             checkServiceStatus(
-                context, _permission as PermissionWithService);
+                context, _permission);
           })
           : null,
       onTap: () {
@@ -177,4 +179,4 @@ class _PermissionState extends State<PermissionWidget> {
       print(_permissionStatus);
     });
   }
-}
+}*/
