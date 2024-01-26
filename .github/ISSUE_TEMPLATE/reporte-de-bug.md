@@ -1,7 +1,7 @@
 ---
 name: Reporte de bug
 about: Crea un reporte para resolverlo lo más pronto posible
-title: "[BUG] Error en X"
+title: "[BUG] Error en "
 labels: bug
 assignees: ''
 
@@ -14,25 +14,28 @@ Una descripción clara y concisa de lo que es el fallo.
 Pasos para reproducir el comportamiento:
 1. Ir a '...'
 2. Haz clic en '...'
-3. Ir hasta "..."
+3. Ir hasta '...'
 4. Ver error
 
 **Comportamiento esperado**
 Una descripción clara y concisa de lo que esperaba que ocurriera.
+- 
 
 **Capturas de pantalla**
 Si procede, añada capturas de pantalla para ayudar a explicar su problema.
+- 
 
 **Escritorio (por favor, complete la siguiente información):**
- - SISTEMA OPERATIVO: [ej. iOS]
- - Navegador [p.ej. chrome, safari]
- - Versión [ej. 22]
+ - SISTEMA OPERATIVO: [ej. iOS]: 
+ - Navegador [p.ej. Chrome, Safari]: 
+ - Versión [ej. 22]: 
 
 **Smartphone (por favor, complete la siguiente información):**
- - Dispositivo: [e.g. iPhone 15 Pro Max]
- - SISTEMA OPERATIVO: [p. ej. iOS17.2]
- - Aplicación [p.ej. navegador predeterminado, safari, chrome]
- - Versión [por ejemplo, 0.0.5-alpha]
+ - Dispositivo [e.g. iPhone 15 Pro Max]: 
+ - SISTEMA OPERATIVO [p. ej. iOS 17.2]: 
+ - Aplicación [p.ej. navegador predeterminado, safari, chrome]: 
+ - Versión [por ejemplo, v0.0.5-alpha]: 
 
 **Contexto adicional**
 Añade aquí cualquier otro contexto sobre el problema.
+-
