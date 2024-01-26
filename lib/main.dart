@@ -27,7 +27,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Run the app
-  runApp(const DebugApp());
+  //runApp(const DebugApp());
+  runApp(const MaterialApp(home: DebugApp()));
+
 }
 /*
 ///Defines the main theme color
