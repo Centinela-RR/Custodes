@@ -30,18 +30,18 @@ class FirebaseConnection {
     });
   }
 
-String generateLocalIdentifier() {
-  const uuid = Uuid();
-  return uuid.v4();
-}
+  String generateLocalIdentifier() {
+    const uuid = Uuid();
+    return uuid.v4();
+  }
 
-Future<void> storeLocalIdentifier(String localIdentifier) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('localIdentifier', localIdentifier);
-}
+  Future<void> storeLocalIdentifier(String localIdentifier) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('localIdentifier', localIdentifier);
+  }
 
-Future<String?> getLocalIdentifier() async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.getString('localIdentifier');
-}
+  Future<String?> getLocalIdentifier() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('localIdentifier');
+  }
 }
