@@ -58,6 +58,6 @@ class DefaultFirebaseOptions {
     projectId: ***REMOVED***,
     databaseURL: ***REMOVED***,
     storageBucket: ***REMOVED***,
-    iosBundleId: ***REMOVED***,
+    iosBundleId: 'com.centinela.custodes',
   );
 }
