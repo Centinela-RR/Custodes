@@ -10,6 +10,8 @@ assignees: ''
 **Descripción del fallo**
 Una descripción clara y concisa de lo que es el fallo.
 
+- 
+
 **Para Reproducir**
 Pasos para reproducir el comportamiento:
 1. Ir a '...'
@@ -18,11 +20,14 @@ Pasos para reproducir el comportamiento:
 4. Ver error
 
 **Comportamiento esperado**
+
 Una descripción clara y concisa de lo que esperaba que ocurriera.
+
 - 
 
 **Capturas de pantalla**
 Si procede, añada capturas de pantalla para ayudar a explicar su problema.
+
 - 
 
 **Escritorio (por favor, complete la siguiente información):**
@@ -38,4 +43,5 @@ Si procede, añada capturas de pantalla para ayudar a explicar su problema.
 
 **Contexto adicional**
 Añade aquí cualquier otro contexto sobre el problema.
+
 -
