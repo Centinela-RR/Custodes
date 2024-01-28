@@ -33,31 +33,31 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: ***REMOVED***,
-    appId: ***REMOVED***,
+    appId: '1:***REMOVED***:web:***REMOVED***',
     messagingSenderId: ***REMOVED***,
     projectId: ***REMOVED***,
-    authDomain: ***REMOVED***,
-    databaseURL: ***REMOVED***,
-    storageBucket: ***REMOVED***,
+    authDomain: 'custodes-97a6a.firebaseapp.com',
+    databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
+    storageBucket: 'custodes-97a6a.appspot.com',
     measurementId: ***REMOVED***,
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: ***REMOVED***,
-    appId: ***REMOVED***,
+    appId: '1:***REMOVED***:android:***REMOVED***',
     messagingSenderId: ***REMOVED***,
     projectId: ***REMOVED***,
-    databaseURL: ***REMOVED***,
-    storageBucket: ***REMOVED***,
+    databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
+    storageBucket: 'custodes-97a6a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: ***REMOVED***,
-    appId: ***REMOVED***,
+    appId: '1:***REMOVED***:ios:***REMOVED***',
     messagingSenderId: ***REMOVED***,
     projectId: ***REMOVED***,
-    databaseURL: ***REMOVED***,
-    storageBucket: ***REMOVED***,
+    databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
+    storageBucket: 'custodes-97a6a.appspot.com',
     iosBundleId: 'com.centinela.custodes',
   );
 }
