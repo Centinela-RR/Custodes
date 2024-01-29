@@ -48,7 +48,8 @@ class DebugAppState extends State<DebugApp> {
         appBar: AppBar(
           title: Text(widgetTitle),
         ),
-        body: Column(
+        body: //const SplashScreen3(),
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SpinningCylinder(), // This for a spinning bean
@@ -68,7 +69,7 @@ class DebugAppState extends State<DebugApp> {
                 ),
                 const SizedBox(width: 5.0, height: 10.0),
                 SizedBox(
-                  // TODO: If width too big, breaks mobile
+                  // FIXME: If width too big, breaks mobile too
                   // JK IT DOESNT SHOW AT ALL FUCK WHY TF DOES IT SHOW IN WEB BUT NOT IN IOS DUD WTFFF
                   // Se ve bonito en web pero en iOS no sale at all wtf
                   width: 90,
