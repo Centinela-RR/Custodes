@@ -40,13 +40,12 @@ dependencies:
   cloud_firestore: ^4.14.0
   uuid: ^4.3.3
   shared_preferences: ^2.2.2
-  device_info_plus: ^9.1.1
-  permission_handler_platform_interface: ^4.1.0
-  baseflow_plugin_template: ^2.1.1
-  permission_handler: ^11.2.0
+  # why another, as well as the other one?
   another_flutter_splash_screen: ^1.2.0
+  # wtf is page transition
   page_transition: ^2.1.0
   flutter_native_splash: ^2.3.10
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
