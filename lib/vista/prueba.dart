@@ -23,7 +23,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
       ),
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
-          // Si el usuario desliza hacia arriba, incrementa la altura del contenedor
+          // Si el usuario desliza hacia arriba, incrementa la altura del contenedor poco a poco
           if (details.primaryDelta! < 0) {
             setState(() {
               containerHeight += 0.01;
@@ -32,13 +32,27 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
               }
             });
           }
-          // Si el usuario desliza hacia abajo, disminuye la altura del contenedor
+          // Si el usuario desliza hacia abajo, disminuye la altura del contenedor poco a poco
           else if (details.primaryDelta! > 0) {
             setState(() {
               containerHeight -= 0.01;
               if (containerHeight < 0.3) {
                 containerHeight = 0.3; // Límite inferior
               }
+            });
+          }
+        },
+        onVerticalDragEnd: (details) {
+          // Si el usuario suelta el gesto hacia arriba, establece la posición máxima
+          if (details.primaryVelocity! < 0) {
+            setState(() {
+              containerHeight = 0.8;
+            });
+          }
+          // Si el usuario suelta el gesto hacia abajo, establece la posición inicial
+          else if (details.primaryVelocity! > 0) {
+            setState(() {
+              containerHeight = 0.3;
             });
           }
         },
