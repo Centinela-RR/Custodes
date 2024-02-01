@@ -6,16 +6,17 @@ class MyPruebaWidget extends StatefulWidget {
   @override
   _MyPruebaWidgetState createState() => _MyPruebaWidgetState();
 }
-
+//animacion para caja de botones
+//colores aun no determinados
 class _MyPruebaWidgetState extends State<MyPruebaWidget> {
-  double containerHeight = 1.0; // Altura inicial
+  double containerHeight = 0.3; // Altura inicial
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
 
 //Haciendo pruebas con la animacion tengo que estudiar mejor esta cosa aaaaa
-
+//jajaja esta toda cuacha
     return Scaffold(
       appBar: AppBar(
         title: Text('Prueba Widget'),
@@ -28,6 +29,15 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
               containerHeight += 0.01;
               if (containerHeight > 0.8) {
                 containerHeight = 0.8; // Límite superior
+              }
+            });
+          }
+          // Si el usuario desliza hacia abajo, disminuye la altura del contenedor
+          else if (details.primaryDelta! > 0) {
+            setState(() {
+              containerHeight -= 0.01;
+              if (containerHeight < 0.3) {
+                containerHeight = 0.3; // Límite inferior
               }
             });
           }
