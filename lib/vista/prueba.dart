@@ -60,7 +60,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
           width: screenSize.width,
           height: screenSize.height,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Color(0xFFF3F0D7)),
+          decoration: BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
           child: Stack(
             children: [
               Positioned(
@@ -70,7 +70,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
                   width: screenSize.width,
                   height: screenSize.height * (1 - containerHeight),
                   decoration: const ShapeDecoration(
-                    color: Color.fromARGB(255, 146, 142, 113),
+                    color: Color(0xFFF3F0D7),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
@@ -88,9 +88,10 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
                   ),
                 ),
               ),
+              
               Positioned(
                 left: screenSize.width * 0.35, // Ajuste según el ancho de la pantalla
-                top: screenSize.height * (containerHeight - 0.01),
+                top: screenSize.height * (containerHeight + 0.01),
                 child: Container(
                   width: screenSize.width * 0.3,
                   height: 8,
