@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MyPruebaWidget extends StatefulWidget {
-  const MyPruebaWidget({Key? key}) : super(key: key);
+  const MyPruebaWidget({super.key});
 
   @override
-  _MyPruebaWidgetState createState() => _MyPruebaWidgetState();
+  MyPruebaWidgetState createState() => MyPruebaWidgetState();
 }
 //animacion para caja de botones
 //colores aun no determinados
-class _MyPruebaWidgetState extends State<MyPruebaWidget> {
+class MyPruebaWidgetState extends State<MyPruebaWidget> {
   double containerHeight = 0.3; // Altura inicial
 
   @override
@@ -19,7 +19,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
 //jajaja esta toda cuacha
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prueba Widget'),
+        title: const Text('Prueba Widget'),
       ),
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
@@ -60,7 +60,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
           width: screenSize.width,
           height: screenSize.height,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
+          decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
           child: Stack(
             children: [
               Positioned(
@@ -96,7 +96,7 @@ class _MyPruebaWidgetState extends State<MyPruebaWidget> {
                   width: screenSize.width * 0.3,
                   height: 8,
                   decoration: ShapeDecoration(
-                    color: Color(0xFFCEE5D0),
+                    color: const Color(0xFFCEE5D0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
