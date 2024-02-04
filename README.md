@@ -6,7 +6,7 @@
   <img src="https://api.codeclimate.com/v1/badges/45771b35ae3140bb91d3/test_coverage" />
 </a>
 
-Aplicación para seguridad pública.
+Aplicación para seguridad vial.
 
 ## Recursos
 
@@ -17,12 +17,20 @@ Aplicación para seguridad pública.
 muestras, orientación sobre desarrollo móvil y una referencia completa de la API.
 
 ## Componentes
-- Entorno de desarrollo: Flutter (holy shit this is annoying to install)
+- Entorno de desarrollo: Flutter
   - iOS 17.0
-    - Componentes de desarrollo:
-      - Entorno de desarrollo: XCode
-      - Componente extra: CocoaPods
+    - Entorno de compilación: XCode
+    - Componente requerido: CocoaPods
   - Android
-    - Entorno de desarrollo: Android Studio.
-- Base de datos: Firebase - Cloud Firestore (o Realtime si nos salen problemas)
+    - Entorno de Compilación: Android Studio.
+    - Componente a tomar en consideración: MultiDex
+- Base de datos: Firebase - Cloud Firestore
 - Entorno de colaboración: GitHub
+- IDE: VSCode/VSCodium
+    - Extensiones:
+      - Better Comments (permite saber dónde hay cosas destacadas)
+      - Flutter (incluye Dart, para entender qué hace qué cosa)
+      - Live Share (para poder ver código en tiempo real de ser requerido)
+    - Opcional:
+      - Figma for VS Code (permite enlazar cuenta de Figma para ver cambios de diseño)
+      - GitLens (permite visualizar cambios realizados por quién)
