@@ -30,7 +30,7 @@ dependencies:
 
   # Firebase stuff
   firebase_core: ^2.24.2
-  cloud_firestore: ^4.14.0
+  cloud_firestore: ^4.15.3
   
   # TODO: change this to use firebase sms auth instead, this is no longer required
   uuid: ^4.3.3
@@ -42,9 +42,6 @@ dependencies:
   # Cool page transitions
   page_transition: ^2.1.0
   
-  # Fuck this animated text bs
-  animated_text_kit: ^4.2.2
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -54,7 +51,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
-
+  assets:
+    - assets/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
