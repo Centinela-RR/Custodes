@@ -1,5 +1,5 @@
 ---
-name: Aspecto Visual - [Nombre del Componente]
+name: Aspecto Visual
 about: Descripción breve del componente visual a trabajar.
 title: "[VISUAL] "
 labels: visual

@@ -25,4 +25,4 @@ Una descripción clara y concisa de las soluciones o características alternativ
 **Contexto adicional**
 Añade aquí cualquier otro contexto o capturas de pantalla sobre la solicitud de función.
 
-- 
+-
