@@ -3,7 +3,7 @@ name: Aspecto Visual
 about: Descripción breve del componente visual a trabajar.
 title: "[VISUAL] "
 labels: visual
-assignees: '2021030063'
+assignees: ''
 
 ---
 

@@ -30,17 +30,10 @@ Si procede, añada capturas de pantalla para ayudar a explicar su problema.
 
 - 
 
-**Escritorio (por favor, complete la siguiente información):**
- - SISTEMA OPERATIVO: [ej. Windows 10]: 
- - Versión del Sistema Operativo [ej. 21H2]: 
- - Navegador [p.ej. Chrome, Safari]: 
- - Versión del Navegador [ej. 101.25 stable release]: 
-
 **Smartphone (por favor, complete la siguiente información):**
  - Dispositivo [e.g. iPhone 15 Pro Max]: 
  - SISTEMA OPERATIVO [p. ej. iOS 17.2]: 
- - Aplicación [p.ej. Safari, Chrome, Custodes]: 
- - Versión [por ejemplo, v0.0.5-alpha]: 
+ - Versión o commit [por ejemplo, v0.0.5-alpha o ec1bc85]: 
 
 **Contexto adicional**
 Añade aquí cualquier otro contexto sobre el problema.
