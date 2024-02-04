@@ -1,16 +1,20 @@
 //import 'package:custodes/vista/prueba.dart'; // Importa el widget desde prueba.dart
 import 'package:custodes/vista/splashscreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'modelo/firebase_options.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Inicializa Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Ideal time to initialize
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   // Ejecuta la aplicación con el widget desde prueba.dart
   runApp(const MaterialApp(

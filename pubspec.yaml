@@ -1,5 +1,5 @@
 name: custodes
-description: "Aplicación para la seguridad pública."
+description: "Aplicación para la seguridad vial."
 publish_to: 'none'
 
 # In Android, build-name is used as versionName while build-number used as versionCode.
@@ -30,10 +30,8 @@ dependencies:
 
   # Firebase stuff
   firebase_core: ^2.24.2
+  firebase_auth: ^4.17.3
   cloud_firestore: ^4.15.3
-  
-  # TODO: change this to use firebase sms auth instead, this is no longer required
-  uuid: ^4.3.3
   shared_preferences: ^2.2.2
   
   # Splashscreen - easy to implement
