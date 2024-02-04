@@ -1,5 +1,5 @@
 ---
-name: Funcionamiento esencial - no visual
+name: Funcionamiento esencial - No visual
 about: Menciona un componente esencial a trabajar
 title: "[ESENCIAL] "
 labels: esencial
