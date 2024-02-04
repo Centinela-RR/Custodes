@@ -31,18 +31,17 @@ class FirebaseConnection {
     });
   }
 
-String generateLocalIdentifier() {
-  
-  return "a";
-}
+  String generateLocalIdentifier() {
+    return "a";
+  }
 
-Future<void> storeLocalIdentifier(String localIdentifier) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('localIdentifier', localIdentifier);
-}
+  Future<void> storeLocalIdentifier(String localIdentifier) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('localIdentifier', localIdentifier);
+  }
 
-Future<String?> getLocalIdentifier() async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.getString('localIdentifier');
-}
+  Future<String?> getLocalIdentifier() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('localIdentifier');
+  }
 }

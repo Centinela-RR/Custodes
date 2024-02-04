@@ -19,7 +19,7 @@ class DebugAppState extends State<DebugApp> {
   void initState() {
     super.initState();
     widgetTitle = ''; // Initial value
-    uniqId = ''; // Initial value
+    uniqId = 'b'; // Initial value
     startTimer();
   }
 
@@ -28,7 +28,7 @@ class DebugAppState extends State<DebugApp> {
       setState(() {
         // Change the value of widgetTitle here
         widgetTitle = widgetTitle == "Ku" ? "Chau" : "Ku"; 
-        uniqId = fb.generateLocalIdentifier();
+        //uniqId = fb.generateLocalIdentifier();
       });
     });
   }
