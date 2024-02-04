@@ -8,6 +8,12 @@
       "type": "shell",
       "command": "flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
       "group": "build"
+    },
+    {
+      "label": "Remove sensitive data",
+      "type": "shell",
+      "command": "java -jar bfg.jar --replace-text ../sensitiveData.txt && git reflog expire --expire=now --all && git gc --prune=now --aggressive && git push --force",
+      "group": "build"
     }
   ]
 }
