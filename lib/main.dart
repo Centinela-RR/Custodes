@@ -1,4 +1,5 @@
-import 'package:custodes/vista/prueba.dart'; // Importa el widget desde prueba.dart
+//import 'package:custodes/vista/prueba.dart'; // Importa el widget desde prueba.dart
+import 'package:custodes/vista/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'modelo/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyPruebaWidget(), // Usa el widget específico desde prueba.dart
+      home: SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
     );
   }
 }

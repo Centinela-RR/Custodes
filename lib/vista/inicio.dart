@@ -1,3 +1,4 @@
+import 'package:custodes/vista/prueba.dart';
 import 'package:flutter/material.dart';
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -7,11 +8,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Custodes',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Custodes'),
+      //home: const MyHomePage(title: 'Custodes'), //* Inicia la aplicación y su vista principal
+      home: const MyPruebaWidget(), //* Inicia la aplicación y su vista de Widget de prueba @Yoel1515
     );
   }
 }
