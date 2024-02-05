@@ -6,6 +6,7 @@ class MyPruebaWidget extends StatefulWidget {
   @override
   MyPruebaWidgetState createState() => MyPruebaWidgetState();
 }
+
 //animacion para caja de botones
 //colores aun no determinados
 class MyPruebaWidgetState extends State<MyPruebaWidget> {
@@ -24,7 +25,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
           // Si el usuario desliza hacia arriba, incrementa la altura del contenedor poco a poco
-          if (details.primaryDelta! < 0) {
+          if (details.primaryDelta! > 0) {
             setState(() {
               containerHeight += 0.01;
               if (containerHeight > 0.8) {
@@ -32,8 +33,8 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
               }
             });
           }
-          // Si el usuario desliza hacia abajo, disminuye la altura del contenedor poco a poco
-          else if (details.primaryDelta! > 0) {
+          // Si el usuario desliza hacia arriba, disminuye la altura del contenedor poco a poco
+          else if (details.primaryDelta! < 0) {
             setState(() {
               containerHeight -= 0.01;
               if (containerHeight < 0.3) {
@@ -43,14 +44,14 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
           }
         },
         onVerticalDragEnd: (details) {
-          // Si el usuario suelta el gesto hacia arriba, establece la posición máxima
-          if (details.primaryVelocity! < 0) {
+          // Si el usuario suelta el gesto hacia abajo, establece la posición máxima
+          if (details.primaryVelocity! > 0) {
             setState(() {
               containerHeight = 0.8;
             });
           }
-          // Si el usuario suelta el gesto hacia abajo, establece la posición inicial
-          else if (details.primaryVelocity! > 0) {
+          // Si el usuario suelta el gesto hacia arriba, establece la posición inicial
+          else if (details.primaryVelocity! < 0) {
             setState(() {
               containerHeight = 0.3;
             });
@@ -60,7 +61,8 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
           width: screenSize.width,
           height: screenSize.height,
           clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
           child: Stack(
             children: [
               Positioned(
@@ -88,9 +90,9 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                   ),
                 ),
               ),
-              
               Positioned(
-                left: screenSize.width * 0.35, // Ajuste según el ancho de la pantalla
+                left: screenSize.width *
+                    0.35, // Ajuste según el ancho de la pantalla
                 top: screenSize.height * (containerHeight + 0.01),
                 child: Container(
                   width: screenSize.width * 0.3,
