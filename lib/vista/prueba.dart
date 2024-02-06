@@ -85,18 +85,17 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                         blurRadius: 4,
                         offset: Offset(0, 4),
                         spreadRadius: 0,
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
               Positioned(
-                left: screenSize.width *
-                    0.35, // Ajuste según el ancho de la pantalla
+                left: screenSize.width *0.35, // Ajuste según el ancho de la pantalla
                 top: screenSize.height * (containerHeight + 0.01),
                 child: Container(
                   width: screenSize.width * 0.3,
-                  height: 8,
+                  height: 3,
                   decoration: ShapeDecoration(
                     color: const Color(0xFFCEE5D0),
                     shape: RoundedRectangleBorder(
@@ -104,6 +103,18 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                     ),
                   ),
                 ),
+              ),
+              Positioned(
+              // Posición del botón, arriba del último contenedor
+              left: screenSize.width * 0.4,
+              top: screenSize.height * (1 - containerHeight) - 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Acciones al presionar el botón
+                  print('Botón presionado');
+                },
+                child: Text('Presionar'),
+              ),
               ),
             ],
           ),

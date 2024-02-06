@@ -1,4 +1,4 @@
-import 'package:custodes/vista/prueba.dart';
+import 'package:custodes/vista/login.dart';
 import 'package:flutter/material.dart';
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
