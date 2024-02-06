@@ -4,7 +4,7 @@ class CustomShapePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Color(0xFFCEE5D0)
+      ..color = const Color(0xFFCEE5D0)
       ..style = PaintingStyle.fill;
 
     // Dibuja un rectángulo en la parte superior de la pantalla
@@ -26,7 +26,7 @@ class CustomShapePainter extends CustomPainter {
 }
 
 class MyPruebaWidget extends StatefulWidget {
-  const MyPruebaWidget({Key? key}) : super(key: key);
+  const MyPruebaWidget({super.key});
 
   @override
   MyPruebaWidgetState createState() => MyPruebaWidgetState();
@@ -80,7 +80,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
               'Hola, Bienvenido a custodes',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF595959),
+                color: const Color(0xFF595959),
                 fontSize: screenSize.width * 0.040,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                 width: screenSize.width * 0.80,
                 height: screenSize.height * 0.07,
                 decoration: ShapeDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment(0.20, -0.98),
                     end: Alignment(-0.2, 0.98),
                     colors: [Color.fromRGBO(243, 240, 215, 1), Color.fromRGBO(206, 229, 208, 1)],
@@ -113,7 +113,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                   'Verificacion',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF5E454B),
+                    color: const Color(0xFF5E454B),
                     fontSize: screenSize.width * 0.035,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w700,
@@ -130,7 +130,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
               'Ingrese numero celular',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF595959),
+                color: const Color(0xFF595959),
                 fontSize: screenSize.width * 0.035,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
@@ -160,7 +160,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             child: Container(
               width: screenSize.width * 0.2,
               height: screenSize.height * 0.1,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/icons/icon.png'),
                   fit: BoxFit.fill,
