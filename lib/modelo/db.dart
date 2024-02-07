@@ -1,28 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 
 class FirebaseConnection {
   final db = FirebaseFirestore.instance;
-  // Upload payload
-  final user = <String, dynamic>{
-    "first": "Ada",
-    "last": "Lovelace",
-    "born": 1815
-  };
 
   void addNewElement(){  
+  // Upload payload
+    var user = <String, dynamic>{
+      "FechaActivo": Timestamp.now(),
+      "FechaRegistro": Timestamp.now(),
+      "IdContactos": generateLocalIdentifier(),
+      "Serial": generateLocalIdentifier()
+    };
     // Add a new document with a generated ID
-    /*db.collection("test").add(user).then((DocumentReference doc) => print('DocumentSnapshot added with ID: ${doc.id}')) {
-      // TODO: implement then
-      throw UnimplementedError();
-    }*/
+    db.collection("users").add(user).then((DocumentReference doc) => debugPrint('DocumentSnapshot added with ID: ${doc.id}'));
   }
 
   Future<void> fetchElement() async {
     List<String> outputList = [];
-    await db.collection("test").get().then((event) {
+    await db.collection("users").get().then((event) {
       for (var doc in event.docs) {
         String output = "${doc.id} => ${doc.data()}";
         debugPrint(output);
@@ -32,7 +31,7 @@ class FirebaseConnection {
   }
 
   String generateLocalIdentifier() {
-    return "a";
+    return const Uuid().v8();
   }
 
   Future<void> storeLocalIdentifier(String localIdentifier) async {

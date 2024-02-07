@@ -76,23 +76,25 @@ class DebugAppState extends State<DebugApp> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      buttonTitle = "Botón 1";
+                      buttonTitle = "Registrar información";
                       uniqId = fb.generateLocalIdentifier();
                     });
+                    fb.addNewElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
                   },
-                  child: const Text("Botón 1"),
+                  child: const Text("Registrar información"),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      buttonTitle = "Botón 2";
+                      buttonTitle = "Obtener información";
                       uniqId = fb.generateLocalIdentifier();
                     });
+                    fb.fetchElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
                   },
-                  child: const Text("Botón 2"),
+                  child: const Text("Obtener información"),
                 ),
               ],
             ),
