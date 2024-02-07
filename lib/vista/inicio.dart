@@ -14,7 +14,8 @@ class MainApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: const MyHomePage(title: 'Custodes'), //* Inicia la aplicación y su vista principal
-      home: const MyPruebaWidget(), //* Inicia la aplicación y su vista de Widget de prueba @Yoel1515
+      home: const MyPruebaWidget(),
+       //* Inicia la aplicación y su vista de Widget de prueba @Yoel1515
     );
   }
 }
