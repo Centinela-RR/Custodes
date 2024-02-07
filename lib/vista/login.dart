@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class CustomShapePainter4 extends CustomPainter {
   final Size screenSize;
 
@@ -40,6 +41,7 @@ class CustomShapePainter4 extends CustomPainter {
     return false;
   }
 }
+
 class CustomShapePainter3 extends CustomPainter {
   final Size screenSize;
 
@@ -67,6 +69,7 @@ class CustomShapePainter3 extends CustomPainter {
     return false;
   }
 }
+
 class CustomShapePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -132,15 +135,13 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
     return Scaffold(
       body: Stack(
         children: [
-          
           Positioned(
             left: 0,
             top: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: const Color(0xFFEEE0C7)
-            ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: const Color(0xFFEEE0C7)),
           ),
           Positioned.fill(
             left: screenSize.width * 0,
@@ -184,78 +185,72 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             ),
           ),
           Positioned(
-            left: screenSize.width * 0.10,
-            top: screenSize.height * 0.07,
-            child: Text(
-              'Iniciar Sesión',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: screenSize.width * 0.10,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-                height: 0,
+            left: screenSize.width *
+                0.1, // 10% del ancho de la pantalla desde el borde izquierdo
+            top: screenSize.height *
+                0.45, // 30% de la altura de la pantalla desde el borde superior
+            child: SizedBox(
+              width: screenSize.width * 0.8, // 80% del ancho de la pantalla
+              height: screenSize.height * 0.3, // Altura fija del widget
+              child: const Text(
+                'Bienvenido a Custodes!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF595959),
+                  fontSize: 24,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w900,
+                  height: 0,
+                ),
               ),
             ),
           ),
           Positioned(
-            left: screenSize.width * 0.10,
-            top: screenSize.height * 0.14,
-            child: Text(
-              'Hola, Bienvenido a custodes',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: const Color(0xFF595959),
-                fontSize: screenSize.width * 0.040,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-                height: 0,
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width * 0.09,
-            top: screenSize.height * 0.65,
+            left: screenSize.width *
+                0.23, // 23% del ancho de la pantalla desde el borde izquierdo
+            top: screenSize.height *
+                0.7, // 60% de la altura de la pantalla desde el borde superior
             child: Opacity(
               opacity: 0.70,
               child: Container(
-                width: screenSize.width * 0.80,
-                height: screenSize.height * 0.07,
+                width: 220,
+                height: 54.87,
                 decoration: ShapeDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment(0.20, -0.98),
-                    end: Alignment(-0.2, 0.98),
-                    colors: [
-                      Color.fromRGBO(243, 240, 215, 1),
-                      Color.fromRGBO(206, 229, 208, 1)
-                    ],
-                  ),
+                  color: const Color(0xFFCEE5D0),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(screenSize.width * 0.02),
+                    side: const BorderSide(width: 1),
+                    borderRadius: BorderRadius.circular(15),
                   ),
+                  shadows: const [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    ),
+                  ],
                 ),
-                alignment: Alignment
-                    .center, // Alinea el texto al centro del contenedor
-                child: Text(
-                  'Verificacion',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: const Color(0xFF5E454B),
-                    fontSize: screenSize.width * 0.035,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
+                child: const Center(
+                  child: Text(
+                    'Enviar código',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           Positioned(
-            left: screenSize.width * 0.088,
-            top: screenSize.height * 0.465,
+            left: screenSize.width * 0.1,
+            top: screenSize.height * 0.5,
             child: Text(
-              'Ingrese numero celular',
+              'Numero celular',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: const Color(0xFF595959),
@@ -267,17 +262,17 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             ),
           ),
           Positioned(
-            left: screenSize.width * 0.08,
-            top: screenSize.height * 0.50,
+            left: screenSize.width *
+                0.1, // 10% del ancho de la pantalla desde el borde izquierdo
+            top: screenSize.height *
+                0.55, // 40% de la altura de la pantalla desde el borde superior
             child: Container(
-              width: screenSize.width * 0.83,
-              decoration: const ShapeDecoration(
+              width: 325, // Ancho fijo del contenedor
+              height: 59, // Altura fija del contenedor
+              decoration: ShapeDecoration(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: 1,
-                    strokeAlign: BorderSide.strokeAlignCenter,
-                    color: Color(0xFF979797),
-                  ),
+                  side: BorderSide(width: 1),
                 ),
               ),
             ),
@@ -294,7 +289,8 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                     Colors.transparent, // Color transparente para la imagen
-                    BlendMode.dst, // Mezcla de color para aplicar el filtro de transparencia
+                    BlendMode
+                        .dst, // Mezcla de color para aplicar el filtro de transparencia
                   ),
                 ),
               ),
