@@ -39,6 +39,7 @@ dependencies:
   
   # Cool page transitions
   page_transition: ^2.1.0
+  uuid: ^4.3.3
   
 dev_dependencies:
   flutter_test:

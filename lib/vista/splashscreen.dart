@@ -18,6 +18,7 @@ class SplashScreen extends StatelessWidget
           gifHeight: 360,
           backgroundColor: const Color.fromRGBO(206, 229, 208, 1.0),
           nextScreen: const MainApp(), //* Al terminar la splashscreen, nos abre MainApp en inicio.dart
+          //nextScreen: const DebugApp(), 
           duration: const Duration(milliseconds: 4500),
 
           onInit: () async {
