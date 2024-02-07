@@ -8,7 +8,7 @@ class CustomShapePainter4 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Color(0xFF5E454B) // Color #5E454B
+      ..color = const Color(0xFF5E454B) // Color #5E454B
       ..style = PaintingStyle.fill;
 
     final path = Path()
@@ -50,7 +50,7 @@ class CustomShapePainter3 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Color(0xFFCEE5D0) // Color #CEE5D0
+      ..color = const Color(0xFFCEE5D0) // Color #CEE5D0
       ..style = PaintingStyle.fill;
 
     final path = Path()
@@ -98,7 +98,7 @@ class CustomShapePainter2 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Color(0xFF5E454B)
+      ..color = const Color(0xFF5E454B)
       ..style = PaintingStyle.fill;
 
     Path path = Path()
@@ -162,7 +162,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             top: 0,
             child: CustomPaint(
               painter: CustomShapePainter2(),
-              child: Container(
+              child: SizedBox(
                 width: screenSize.width,
                 height: screenSize.height,
                 // Otros atributos para el contenedor según sea necesario
@@ -269,7 +269,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             child: Container(
               width: 325, // Ancho fijo del contenedor
               height: 59, // Altura fija del contenedor
-              decoration: ShapeDecoration(
+              decoration: const ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(width: 1),
