@@ -111,9 +111,9 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
               child: ElevatedButton(
                 onPressed: () {
                   // Acciones al presionar el botón
-                  print('Botón presionado');
+                  debugPrint('Botón presionado');
                 },
-                child: Text('Presionar'),
+                child: const Text('Presionar'),
               ),
               ),
             ],
