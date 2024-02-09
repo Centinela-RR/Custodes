@@ -9,10 +9,10 @@ publish_to: 'none'
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 # Prealpha, up until 0.1
-version: 0.0.1+1
+version: 0.0.3+1
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: '^3.2.4'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
