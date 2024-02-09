@@ -1,303 +1,205 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
-class CustomShapePainter4 extends CustomPainter {
-  final Size screenSize;
-
-  CustomShapePainter4(this.screenSize);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF5E454B) // Color #5E454B
-      ..style = PaintingStyle.fill;
-
-    final path = Path()
-      ..moveTo(456, 217)
-      ..lineTo(-2.00003, 217)
-      ..lineTo(-2.00003, 29.278)
-      ..cubicTo(
-        -2.00003,
-        29.278,
-        105.544,
-        -48.6203,
-        94.3084,
-        49.7103,
-      )
-      ..cubicTo(
-        83.0724,
-        148.041,
-        456,
-        29.278,
-        456,
-        29.278,
-      )
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
+  LoginPageState createState() => LoginPageState();
 }
 
-class CustomShapePainter3 extends CustomPainter {
-  final Size screenSize;
+class LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _smsCodeController = TextEditingController();
 
-  CustomShapePainter3(this.screenSize);
+  late String _verificationId;
+  int? _resendToken;
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFCEE5D0) // Color #CEE5D0
-      ..style = PaintingStyle.fill;
+  Future<void> _verifyPhoneNumber() async {
+    if (_phoneNumberController.text.isEmpty) {
+      //Show alert dialog
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content:
+                const Text('Por favor introduzca un número de teléfono válido'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
 
-    final path = Path()
-      ..moveTo(456, 205)
-      ..lineTo(-33, 205)
-      ..lineTo(-33, 27.6589)
-      ..cubicTo(-33, 27.6589, 81.8236, -45.9316, 69.8271, 46.9613)
-      ..cubicTo(57.8306, 139.854, 456, 27.6589, 456, 27.6589)
-      ..close();
+    verificationCompleted(AuthCredential phoneAuthCredential) async {
+      await _auth.signInWithCredential(phoneAuthCredential);
+    }
 
-    canvas.drawPath(path, paint);
+    verificationFailed(FirebaseAuthException authException) {
+      debugPrint('${authException.message}');
+    }
+
+    codeAutoRetrievalTimeout(String verificationId) {
+      _verificationId = verificationId;
+    }
+
+    codeSent(String verificationId, int? resendToken) {
+      // Almacenar el verificationId y resendToken
+      _verificationId = verificationId;
+      _resendToken = resendToken;
+    }
+
+    await _auth.verifyPhoneNumber(
+      // Agregar +52 para limitar el acceso a gente de México
+      phoneNumber: '+52${_phoneNumberController.text}',
+      // Expira en 60 segundos
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: codeSent,
+      forceResendingToken: _resendToken,
+      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+    );
   }
 
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  Future<void> _signInWithPhoneNumber() async {
+    if (_smsCodeController.text.isEmpty) {
+      //Show alert dialog
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text(
+                'Por favor introduzca su código SMS recibido, si no lo ha recibido solicite uno nuevo.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+    final AuthCredential credential = PhoneAuthProvider.credential(
+      verificationId: _verificationId,
+      smsCode: _smsCodeController.text,
+    );
+
+    await _auth.signInWithCredential(credential);
+    debugPrint(
+        'Should go to the next screen by now! Usuario: ${_auth.currentUser!.uid}');
   }
-}
-
-class CustomShapePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = const Color(0xFFCEE5D0)
-      ..style = PaintingStyle.fill;
-
-    Path path = Path()
-      ..moveTo(0, -21)
-      ..lineTo(467, -21)
-      ..lineTo(467, 177.103)
-      ..quadraticBezierTo(357.342, 259.309, 368.799, 155.541)
-      ..quadraticBezierTo(380.256, 51.7725, 0, 177.103)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class CustomShapePainter2 extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = const Color(0xFF5E454B)
-      ..style = PaintingStyle.fill;
-
-    Path path = Path()
-      ..moveTo(0, 0)
-      ..lineTo(457, 0)
-      ..lineTo(457, 197.796)
-      ..quadraticBezierTo(349.69, 279.874, 360.902, 176.267)
-      ..quadraticBezierTo(372.113, 72.6596, 0, 197.796)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class MyPruebaWidget extends StatefulWidget {
-  const MyPruebaWidget({super.key});
-
-  @override
-  MyPruebaWidgetState createState() => MyPruebaWidgetState();
-}
-
-class MyPruebaWidgetState extends State<MyPruebaWidget> {
-  double containerHeight = 0.03; // Altura inicial
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            top: 0,
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: const Color(0xFFEEE0C7)),
-          ),
-          Positioned.fill(
-            left: screenSize.width * 0,
-            top: screenSize.height * 0.77,
-            child: CustomPaint(
-              painter: CustomShapePainter4(screenSize),
-            ),
-          ),
-          Positioned.fill(
-            left: screenSize.width * 0,
-            top: screenSize.height * 0.8,
-            child: CustomPaint(
-              painter: CustomShapePainter3(screenSize),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            top: 0,
-            child: CustomPaint(
-              painter: CustomShapePainter2(),
-              child: SizedBox(
-                width: screenSize.width,
-                height: screenSize.height,
-                // Otros atributos para el contenedor según sea necesario
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width * 0,
-            top: screenSize.height * 0,
-            child: CustomPaint(
-              painter: CustomShapePainter(),
-              child: Container(
-                width: screenSize.width * 0,
-                height: screenSize.height * 0,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.transparent),
-                ),
-                // Otros atributos para el contenedor según sea necesario
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width *
-                0.1, // 10% del ancho de la pantalla desde el borde izquierdo
-            top: screenSize.height *
-                0.45, // 30% de la altura de la pantalla desde el borde superior
-            child: SizedBox(
-              width: screenSize.width * 0.8, // 80% del ancho de la pantalla
-              height: screenSize.height * 0.3, // Altura fija del widget
-              child: const Text(
-                'Bienvenido a Custodes!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF595959),
-                  fontSize: 24,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w900,
-                  height: 0,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width *
-                0.23, // 23% del ancho de la pantalla desde el borde izquierdo
-            top: screenSize.height *
-                0.7, // 60% de la altura de la pantalla desde el borde superior
-            child: Opacity(
-              opacity: 0.70,
-              child: Container(
-                width: 220,
-                height: 54.87,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFFCEE5D0),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  shadows: const [
-                    BoxShadow(
-                      color: Color(0x3F000000),
-                      blurRadius: 4,
-                      offset: Offset(0, 4),
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
-                child: const Center(
-                  child: Text(
-                    'Enviar código',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
-                      height: 0,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width * 0.1,
-            top: screenSize.height * 0.5,
-            child: Text(
-              'Numero celular',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: const Color(0xFF595959),
-                fontSize: screenSize.width * 0.035,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-                height: 0,
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width *
-                0.1, // 10% del ancho de la pantalla desde el borde izquierdo
-            top: screenSize.height *
-                0.55, // 40% de la altura de la pantalla desde el borde superior
-            child: Container(
-              width: 325, // Ancho fijo del contenedor
-              height: 59, // Altura fija del contenedor
-              decoration: const ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: screenSize.width * 0.40,
-            top: screenSize.height * 0.27,
-            child: Container(
-              width: screenSize.width * 0.2,
-              height: screenSize.height * 0.1,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/icons/icon.png'),
-                  fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(
-                    Colors.transparent, // Color transparente para la imagen
-                    BlendMode
-                        .dst, // Mezcla de color para aplicar el filtro de transparencia
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Bienvenido!'),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _phoneNumberController,
+              decoration: const InputDecoration(
+                  labelText: 'Número celular',
+                  prefixIcon: Icon(Icons.phone),
+                  prefixText: '+52 '),
+            ),
+            const SizedBox(height: 16.0),
+            TextField(
+              controller: _smsCodeController,
+              decoration: const InputDecoration(
+                  labelText: 'Código SMS', prefixIcon: Icon(Icons.sms)),
+            ),
+            const SizedBox(height: 16.0),
+            BtnSms(onButtonPressed: _verifyPhoneNumber),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: _signInWithPhoneNumber,
+              child: const Text('Iniciar sesión'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BtnSms extends StatefulWidget {
+  final VoidCallback onButtonPressed;
+  const BtnSms({super.key, required this.onButtonPressed});
+
+  @override
+  BtnSmsState createState() => BtnSmsState();
+}
+
+class BtnSmsState extends State<BtnSms> {
+  late Timer _timer;
+  int _start = 60;
+  bool _isButtonDisabled = false;
+  String _buttonText = 'Enviar código SMS';
+
+  void startTimer() {
+    _isButtonDisabled = true;
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer timer) {
+        if (_start < 1) {
+          timer.cancel();
+          _buttonText = 'Enviar código SMS';
+          _isButtonDisabled = false;
+          if (mounted) {
+            setState(() {});
+          }
+        } else {
+          _start = _start - 1;
+          _buttonText = 'Reenviar código en $_start';
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: _isButtonDisabled
+          ? null
+          : () {
+              widget.onButtonPressed();
+              setState(() {
+                _start = 60;
+                _buttonText = 'Reenviar código en $_start';
+              });
+              startTimer();
+            },
+      child: Text(_buttonText),
     );
   }
 }
