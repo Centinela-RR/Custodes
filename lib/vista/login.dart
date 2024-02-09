@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
-import 'package:custodes/controlador/widgets/alerts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,19 +23,19 @@ class LoginPageState extends State<LoginPage> {
       await showDialog(
         context: context,
         builder: (context) {
-          return ShowAlert(
-              context: context,
-              title: const Text('Error'),
-              content: const Text(
-                  'Por favor introduzca un número de celular válido.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ]);
+          return AlertDialog(
+            title: const Text('Error'),
+            content:
+                const Text('Por favor introduzca un número de teléfono válido'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
         },
       );
       return;
@@ -79,19 +78,19 @@ class LoginPageState extends State<LoginPage> {
       await showDialog(
         context: context,
         builder: (context) {
-          return ShowAlert(
-              context: context,
-              title: const Text('Error'),
-              content: const Text(
-                  'Por favor introduzca su código SMS recibido, si no lo ha recibido solicite uno nuevo.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ]);
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text(
+                'Por favor introduzca su código SMS recibido, si no lo ha recibido solicite uno nuevo.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
         },
       );
       return;

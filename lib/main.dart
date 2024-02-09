@@ -1,20 +1,10 @@
-// Importa las librerías necesarias
-
-// Firestore
+//import 'package:custodes/vista/prueba.dart'; // Importa el widget desde prueba.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custodes/vista/splashscreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'modelo/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-// Vistas
-import 'package:custodes/vista/splashscreen.dart';
-
-// Flutter
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// Widgets
-import 'package:custodes/controlador/widgets/run_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,5 +36,22 @@ Future<void> main() async {
   }
 
   // Ejecuta la aplicación con el widget desde prueba.dart
-  runApp(const PlatformApp(home: SplashScreen()));
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(), // Usa el widget desde prueba.dart aquí
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Custodes',
+      debugShowCheckedModeBanner: false,
+      home:
+          SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+    );
+  }
 }
