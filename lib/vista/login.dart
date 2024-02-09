@@ -75,7 +75,7 @@ class LoginPageState extends State<LoginPage> {
 
   Future<void> _signInWithPhoneNumber() async {
     if (_smsCodeController.text.isEmpty) {
-      //Show alert dialog
+      // Mostar alerta
       await showDialog(
         context: context,
         builder: (context) {
@@ -104,6 +104,10 @@ class LoginPageState extends State<LoginPage> {
     await _auth.signInWithCredential(credential);
     debugPrint(
         'Should go to the next screen by now! Usuario: ${_auth.currentUser!.uid}');
+    // TODO: How can we go to the next screen without using buildContext since it's not available here?
+    // ! Don't use 'BuildContext's across async gaps.
+    // ! This is a bad practice and can lead to memory leaks.
+    // ! Use a 'StatefulWidget' to handle the 'BuildContext' and pass it to the function.
   }
 
   @override
