@@ -1,5 +1,6 @@
 import 'package:custodes/vista/login.dart';
 import 'package:flutter/material.dart';
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
@@ -13,9 +14,8 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      //home: const MyHomePage(title: 'Custodes'), //* Inicia la aplicación y su vista principal
-      home: const MyPruebaWidget(),
-       //* Inicia la aplicación y su vista de Widget de prueba @Yoel1515
+      //home: const MyHomePage(title: 'Custodes'), // * Inicia la aplicación y su vista principal
+      home: const LoginPage(), // * Cambiar a la vista de inicio de sesión
     );
   }
 }

@@ -18,17 +18,19 @@ Future<void> main() async {
 
   if (useEmulator) {
     // [Authentication | localhost:9099]
-    await FirebaseAuth.instance.useAuthEmulator("localhost",9099);
-    
-    // Setting the emulator after a hot restart breaks Firestore. 
+    await FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
+
+    // Setting the emulator after a hot restart breaks Firestore.
     // See: https://github.com/FirebaseExtended/flutterfire/issues/6216
-    
+
     // [Firestore | localhost:8080]
-    try { FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080); }
-    catch (error) {  // throws a JavaScript object instead of a FirebaseException
+    try {
+      FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
+    } catch (error) {
+      // throws a JavaScript object instead of a FirebaseException
       final String code = (error as dynamic).code;
       if (code != "failed-precondition") {
-        rethrow; 
+        rethrow;
       }
     }
   }
@@ -46,8 +48,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      title: 'Custodes',
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+      home:
+          SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
     );
   }
 }
