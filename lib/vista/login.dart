@@ -18,6 +18,8 @@ class LoginPageState extends State<LoginPage> {
   int? _resendToken;
 
   Future<void> _verifyPhoneNumber() async {
+    // Validar que el número de teléfono no esté vacío
+    // TODO: No ejecutar la espera si el número de teléfono está vacío
     if (_phoneNumberController.text.isEmpty) {
       //Show alert dialog
       await showDialog(
