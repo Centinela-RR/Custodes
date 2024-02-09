@@ -36,14 +36,11 @@ Future<void> main() async {
   }
 
   // Ejecuta la aplicación con el widget desde prueba.dart
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(), // Usa el widget desde prueba.dart aquí
-  ));
+  runApp(const StartApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StartApp extends StatelessWidget {
+  const StartApp({super.key});
 
   @override
   Widget build(BuildContext context) {
