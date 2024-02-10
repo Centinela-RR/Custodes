@@ -25,7 +25,7 @@ class LoginPageState extends State<LoginPage> {
       await showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return AlertDialog.adaptive(
             title: const Text('Error'),
             content:
                 const Text('Por favor introduzca un número de teléfono válido'),
@@ -80,7 +80,7 @@ class LoginPageState extends State<LoginPage> {
       await showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return AlertDialog.adaptive(
             title: const Text('Error'),
             content: const Text(
                 'Por favor introduzca su código SMS recibido, si no lo ha recibido solicite uno nuevo.'),
@@ -106,6 +106,18 @@ class LoginPageState extends State<LoginPage> {
     debugPrint(
         'Should go to the next screen by now! Usuario: ${_auth.currentUser!.uid}');
     // TODO: How can we go to the next screen without using buildContext since it's not available here?
+    AlertDialog.adaptive(
+      title: const Text('Éxito'),
+      content: const Text('Inicio de sesión exitoso'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    );
     // ! Don't use 'BuildContext's across async gaps.
     // ! This is a bad practice and can lead to memory leaks.
     // ! Use a 'StatefulWidget' to handle the 'BuildContext' and pass it to the function.

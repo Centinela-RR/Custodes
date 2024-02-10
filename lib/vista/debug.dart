@@ -27,7 +27,7 @@ class DebugAppState extends State<DebugApp> {
     timer = Timer.periodic(const Duration(milliseconds: 438), (timer) {
       setState(() {
         // Change the value of widgetTitle here
-        widgetTitle = widgetTitle == "Ku" ? "Chau" : "Ku"; 
+        widgetTitle = widgetTitle == "Ku" ? "Chau" : "Ku";
         //uniqId = fb.generateLocalIdentifier();
       });
     });
@@ -48,15 +48,14 @@ class DebugAppState extends State<DebugApp> {
           title: Text(widgetTitle),
         ),
         body: //const SplashScreen3(),
-        Column(
+            Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SpinningCylinder(), // This for a spinning bean
             const SizedBox(height: 20), // Add some spacing
             const Row(
               mainAxisSize: MainAxisSize.min,
-              children: 
-              <Widget>[
+              children: <Widget>[
                 //const SizedBox(width: 20.0, height: 100.0),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -68,7 +67,8 @@ class DebugAppState extends State<DebugApp> {
                 SizedBox(width: 5.0, height: 10.0),
               ],
             ),
-            Text("Unique id: $uniqId"), // Display uniqId directly as Text widget
+            Text(
+                "Unique id: $uniqId"), // Display uniqId directly as Text widget
             const SizedBox(height: 20), // Add some spacing
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +108,7 @@ class DebugAppState extends State<DebugApp> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           title: Text(buttonTitle),
           content: Text(message),
           actions: <Widget>[
@@ -125,7 +125,6 @@ class DebugAppState extends State<DebugApp> {
   }
 }
 
-
 class SpinningCylinder extends StatefulWidget {
   const SpinningCylinder({super.key});
 
@@ -133,7 +132,8 @@ class SpinningCylinder extends StatefulWidget {
   SpinningCylinderState createState() => SpinningCylinderState();
 }
 
-class SpinningCylinderState extends State<SpinningCylinder> with SingleTickerProviderStateMixin {
+class SpinningCylinderState extends State<SpinningCylinder>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -141,7 +141,7 @@ class SpinningCylinderState extends State<SpinningCylinder> with SingleTickerPro
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 438*4),
+      duration: const Duration(milliseconds: 438 * 4),
     )..repeat();
   }
 
