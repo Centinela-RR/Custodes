@@ -1,6 +1,6 @@
 name: custodes
 description: "Aplicación para la seguridad vial."
-publish_to: 'none'
+publish_to: "none"
 
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
@@ -12,7 +12,7 @@ publish_to: 'none'
 version: 0.0.3+1
 
 environment:
-  sdk: '^3.2.4'
+  sdk: "^3.2.4"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,19 +33,19 @@ dependencies:
   firebase_auth: ^4.17.3
   cloud_firestore: ^4.15.3
   shared_preferences: ^2.2.2
-  
+
   # Splashscreen - easy to implement
   another_flutter_splash_screen: ^1.2.0
-  
+
   # Cool page transitions
   page_transition: ^2.1.0
   uuid: ^4.3.3
-  
+  open_street_map_search_and_pick: ^0.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
-
 
 # The following section is specific to Flutter packages.
 flutter:

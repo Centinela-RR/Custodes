@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.9.0' // Probar con la version anterior de 1.7.10, me tronaba y se corrompio mis dependencias por lo que se aumento
     repositories {
         google()
         mavenCentral()

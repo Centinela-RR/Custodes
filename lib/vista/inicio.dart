@@ -1,5 +1,6 @@
 import 'package:custodes/vista/login.dart';
 import 'package:flutter/material.dart';
+import 'package:custodes/vista/mapa.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -14,7 +15,8 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(), // * Cambiar a la vista de inicio de sesión
+      home:
+          const Mapa(), // * Cambiar a la vista de inicio de sesión, actualmente envia al mapa
     );
   }
 }
