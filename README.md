@@ -10,6 +10,7 @@ Aplicación para seguridad vial.
 
 ## Recursos
 
+- [Instala Flutter](https://github.com/Centinela-RR/Custodes/wiki/Instalación-de-Flutter)
 - [Lab: Escribiendo la primer aplicación de Flutter](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Ejemplos útiles de Flutter](https://docs.flutter.dev/cookbook)
 - [No le sé a GitHub, qué hago?](https://github.com/Centinela-RR/Custodes/wiki/Inicio)
@@ -23,13 +24,14 @@ muestras, orientación sobre desarrollo móvil y una referencia completa de la A
     - Componente requerido: CocoaPods
   - Android
     - Entorno de Compilación: Android Studio.
-    - Componente a tomar en consideración: MultiDex
 - Base de datos: Firebase - Cloud Firestore
+- Autenticación: Firebase auth
 - Entorno de colaboración: GitHub
+- Vistas de diseño: Figma
 - IDE: VSCode/VSCodium
     - Extensiones:
       - Better Comments (permite saber dónde hay cosas destacadas)
-      - Flutter (incluye Dart, para entender qué hace qué cosa)
+      - Flutter
       - Live Share (para poder ver código en tiempo real de ser requerido)
     - Opcional:
       - Figma for VS Code (permite enlazar cuenta de Figma para ver cambios de diseño)
