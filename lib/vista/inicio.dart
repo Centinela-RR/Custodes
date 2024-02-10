@@ -34,12 +34,12 @@ class AuthCheck extends StatefulWidget {
 
 class _AuthCheckState extends State<AuthCheck> {
   // Variable estática para controlar el estado de autenticación
-  static bool _isLoggedIn = true;
+  static bool _isLoggedIn = false;
 
   // Método para actualizar el estado _isLoggedIn
   void updateLoginStatus() {
     setState(() {
-      _isLoggedIn = false;
+      _isLoggedIn = true;
     });
   }
 
