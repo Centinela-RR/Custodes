@@ -108,7 +108,7 @@ class DebugAppState extends State<DebugApp> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           title: Text(buttonTitle),
           content: Text(message),
           actions: <Widget>[

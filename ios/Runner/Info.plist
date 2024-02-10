@@ -24,6 +24,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+			<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+							<string>app-1-528581573998-ios-e85e72c830391c4b00157f</string>
+					</array>
+			</dict>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
