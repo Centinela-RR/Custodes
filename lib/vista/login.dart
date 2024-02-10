@@ -118,6 +118,7 @@ class LoginPageState extends State<LoginPage> {
       ],
     );
     // TODO: How can we go to the next screen without using buildContext since it's not available here?
+    // FIXME: This alert isn't showing up
     AlertDialog.adaptive(
       title: const Text('Éxito'),
       content: const Text('Inicio de sesión exitoso'),
