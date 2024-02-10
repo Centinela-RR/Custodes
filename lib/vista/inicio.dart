@@ -1,7 +1,8 @@
 import 'package:custodes/vista/login.dart';
-//import 'package:custodes/vista/prueba_inicio.dart';
+import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -21,28 +22,43 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class AuthCheck extends StatelessWidget {
+class AuthCheck extends StatefulWidget {
   const AuthCheck({Key? key}) : super(key: key);
 
   @override
+  _AuthCheckState createState() => _AuthCheckState();
+
+  // Método estático para acceder al estado del widget desde cualquier lugar de la jerarquía de widgets
+  static _AuthCheckState? of(BuildContext context) => context.findAncestorStateOfType<_AuthCheckState>();
+}
+
+class _AuthCheckState extends State<AuthCheck> {
+  // Variable estática para controlar el estado de autenticación
+  static bool _isLoggedIn = true;
+
+  // Método para actualizar el estado _isLoggedIn
+  void updateLoginStatus() {
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
+
+  Future<void> _checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    setState(() {
+      _isLoggedIn = isLoggedIn;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          // Si estamos esperando una respuesta de autenticación,
-          // se puede mostrar un indicador de carga o algo similar
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasData) {
-          // Si hay un usuario autenticado, muestra la pantalla de inicio
-          print('Entró a InicioPage');
-          return const SizedBox(); // No se muestra ninguna pantalla
-        } else {
-          // Si no hay un usuario autenticado, muestra la pantalla de inicio de sesión
-          print('Entró a LoginPage');
-          return const LoginPage();
-        }
-      },
-    );
+    if (_isLoggedIn) {
+      print('Entró a InicioPage');
+      return const MyPruebaWidget(); // Mostrar la pantalla de inicio
+    } else {
+      print('Entró a LoginPage');
+      return const LoginPage(); // Mostrar la pantalla de inicio de sesión
+    }
   }
 }
