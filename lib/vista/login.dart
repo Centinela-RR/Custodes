@@ -105,6 +105,18 @@ class LoginPageState extends State<LoginPage> {
     await _auth.signInWithCredential(credential);
     debugPrint(
         'Should go to the next screen by now! Usuario: ${_auth.currentUser!.uid}');
+    AlertDialog.adaptive(
+      title: const Text('Éxito'),
+      content: const Text('Inicio de sesión exitoso'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    );
     // TODO: How can we go to the next screen without using buildContext since it's not available here?
     AlertDialog.adaptive(
       title: const Text('Éxito'),
