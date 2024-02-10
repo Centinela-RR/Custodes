@@ -21,6 +21,7 @@ class Mapa extends StatefulWidget {
 - Capturar posicion al dar clic
 - Usar la base de datos
 - Arreglar el servidor solo quitar (a) del archivo
+- Como integrar localizacion actual permanente sin que sea manual
 - ....
 */
 class _MapaState extends State<Mapa> {
