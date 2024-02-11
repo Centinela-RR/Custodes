@@ -2,7 +2,7 @@ import 'package:custodes/vista/login.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/material.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -23,16 +23,17 @@ class MainApp extends StatelessWidget {
 }
 
 class AuthCheck extends StatefulWidget {
-  const AuthCheck({Key? key}) : super(key: key);
+  const AuthCheck({super.key});
 
   @override
-  _AuthCheckState createState() => _AuthCheckState();
+  AuthCheckState createState() => AuthCheckState();
 
   // Método estático para acceder al estado del widget desde cualquier lugar de la jerarquía de widgets
-  static _AuthCheckState? of(BuildContext context) => context.findAncestorStateOfType<_AuthCheckState>();
+  static AuthCheckState? of(BuildContext context) =>
+      context.findAncestorStateOfType<AuthCheckState>();
 }
 
-class _AuthCheckState extends State<AuthCheck> {
+class AuthCheckState extends State<AuthCheck> {
   // Variable estática para controlar el estado de autenticación
   static bool _isLoggedIn = false;
 
@@ -43,21 +44,21 @@ class _AuthCheckState extends State<AuthCheck> {
     });
   }
 
-  Future<void> _checkLoginStatus() async {
+  /*Future<void> _checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     setState(() {
       _isLoggedIn = isLoggedIn;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     if (_isLoggedIn) {
-      print('Entró a InicioPage');
+      debugPrint('Entró a InicioPage');
       return const MyPruebaWidget(); // Mostrar la pantalla de inicio
     } else {
-      print('Entró a LoginPage');
+      debugPrint('Entró a LoginPage');
       return const LoginPage(); // Mostrar la pantalla de inicio de sesión
     }
   }
