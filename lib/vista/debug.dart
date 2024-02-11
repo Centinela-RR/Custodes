@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../modelo/db.dart';
+import 'package:custodes/controlador/reportes.dart';
 
 class DebugApp extends StatefulWidget {
   const DebugApp({super.key});
@@ -13,6 +14,7 @@ class DebugAppState extends State<DebugApp> {
   late String widgetTitle, uniqId;
   String buttonTitle = '';
   FirebaseConnection fb = FirebaseConnection();
+  Reportes reportes = Reportes();
   late Timer timer;
 
   @override
@@ -78,6 +80,10 @@ class DebugAppState extends State<DebugApp> {
                     setState(() {
                       buttonTitle = "Registrar información";
                       uniqId = fb.generateLocalIdentifier();
+                      reportes.generarReporte(
+                          idUsuario: 'test',
+                          ubicacion: 'test2',
+                          tipoReporte: 6);
                     });
                     fb.addNewElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
@@ -91,7 +97,8 @@ class DebugAppState extends State<DebugApp> {
                       buttonTitle = "Obtener información";
                       uniqId = fb.generateLocalIdentifier();
                     });
-                    fb.fetchElement();
+                    reportes.enviarReporte();
+                    //fb.fetchElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
                   },
                   child: const Text("Obtener información"),
