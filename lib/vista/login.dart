@@ -1,6 +1,9 @@
+import 'package:custodes/modelo/db.dart';
+import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,12 +13,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // ! This is the widget to show after login
+  final Widget afterLogin = const MyPruebaWidget();
+
+  // User authentication controller
+  UserAuth auth = UserAuth();
+
+  // Controllers for the text fields
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _smsCodeController = TextEditingController();
 
-  late String _verificationId;
-  int? _resendToken;
+  Future<void> persistLogin(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', value);
+  }
 
   Future<void> _verifyPhoneNumber() async {
     // Validar que el número de teléfono no esté vacío
@@ -42,42 +53,13 @@ class LoginPageState extends State<LoginPage> {
       );
       return;
     }
-
-    verificationCompleted(AuthCredential phoneAuthCredential) async {
-      await _auth.signInWithCredential(phoneAuthCredential);
-    }
-
-    verificationFailed(FirebaseAuthException authException) {
-      debugPrint('${authException.message}');
-    }
-
-    codeAutoRetrievalTimeout(String verificationId) {
-      _verificationId = verificationId;
-    }
-
-    codeSent(String verificationId, int? resendToken) {
-      // Almacenar el verificationId y resendToken
-      _verificationId = verificationId;
-      _resendToken = resendToken;
-    }
-
-    await _auth.verifyPhoneNumber(
-      // Agregar +52 para limitar el acceso a gente de México
-      phoneNumber: '+52${_phoneNumberController.text}',
-      // Expira en 60 segundos
-      timeout: const Duration(seconds: 60),
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      codeSent: codeSent,
-      forceResendingToken: _resendToken,
-      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-    );
+    auth.signInWithPhone(phoneNumber: _phoneNumberController.text);
   }
 
   Future<void> _signInWithPhoneNumber() async {
     if (_smsCodeController.text.isEmpty) {
       // Mostar alerta
-      await showDialog(
+      await showAdaptiveDialog(
         context: context,
         builder: (context) {
           return AlertDialog.adaptive(
@@ -97,31 +79,48 @@ class LoginPageState extends State<LoginPage> {
       );
       return;
     }
-    final AuthCredential credential = PhoneAuthProvider.credential(
-      verificationId: _verificationId,
-      smsCode: _smsCodeController.text,
-    );
-
-    await _auth.signInWithCredential(credential);
-    debugPrint(
-        'Should go to the next screen by now! Usuario: ${_auth.currentUser!.uid}');
-    // TODO: How can we go to the next screen without using buildContext since it's not available here?
-    // FIXME: This alert isn't showing up
-    AlertDialog.adaptive(
-      title: const Text('Éxito'),
-      content: const Text('Inicio de sesión exitoso'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('OK'),
-        ),
-      ],
-    );
-    // ! Don't use 'BuildContext's across async gaps.
-    // ! This is a bad practice and can lead to memory leaks.
-    // ! Use a 'StatefulWidget' to handle the 'BuildContext' and pass it to the function.
+    Future<bool> res = auth.verifyPhoneCode(smsCode: _smsCodeController.text);
+    if (await res && context.mounted) {
+      persistLogin(true);
+      await showAdaptiveDialog(
+          context: context,
+          builder: (context) => AlertDialog.adaptive(
+                title: const Text('Éxito'),
+                content: const Text('Inicio de sesión exitoso'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ));
+      // Repeat cuz if alert isn't closed, it will throw an error
+      if (!context.mounted) return;
+      Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            // Aquí se cambia el widget a mostrar
+            builder: (BuildContext context) => afterLogin,
+          ));
+    } else if (!await res && context.mounted) {
+      await showAdaptiveDialog(
+          context: context,
+          builder: (context) => AlertDialog.adaptive(
+                title: const Text('Error'),
+                content: const Text(
+                    'Algo ha salido mal, por favor espere unos minutos e inténtelo de nuevo.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ));
+    }
   }
 
   @override

@@ -78,7 +78,7 @@ class DebugAppState extends State<DebugApp> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      buttonTitle = "Registrar información";
+                      buttonTitle = "Preparar información";
                       uniqId = fb.generateLocalIdentifier();
                       reportes.generarReporte(
                           idUsuario: 'test',
@@ -88,20 +88,26 @@ class DebugAppState extends State<DebugApp> {
                     fb.addNewElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
                   },
-                  child: const Text("Registrar información"),
+                  child: const Text("Preparar información"),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      buttonTitle = "Obtener información";
+                      buttonTitle = "Enviar información";
                       uniqId = fb.generateLocalIdentifier();
                     });
-                    reportes.enviarReporte();
+                    String res = reportes.enviarReporte();
+                    if (!res.contains("Error")) {
+                      _showAlertDialog(context, "Success!",
+                          "Report sent succesfully! Result: $res");
+                    } else {
+                      _showAlertDialog(context, "Error", res);
+                    }
                     //fb.fetchElement();
                     _showAlertDialog(context, buttonTitle, uniqId);
                   },
-                  child: const Text("Obtener información"),
+                  child: const Text("Enviar información"),
                 ),
               ],
             ),
