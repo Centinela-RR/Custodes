@@ -15,7 +15,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  const bool useEmulator = false;
+  // Emulador de Firebase: true para usar el emulador, false para usar la base de datos en la nube
+  // No usar la nube porque +10 mensajes por mes cuestan dinero :'D
+  const bool useEmulator = true;
   const String host = "10.0.0.8";
 
   // ignore: dead_code
