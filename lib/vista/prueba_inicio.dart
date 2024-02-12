@@ -1,5 +1,4 @@
-import 'package:custodes/modelo/db.dart';
-import 'package:custodes/vista/inicio.dart';
+import 'package:custodes/controlador/sistema/auth.dart';
 import 'package:flutter/material.dart';
 
 class MyPruebaWidget extends StatefulWidget {
