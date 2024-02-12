@@ -31,6 +31,9 @@ class LoginPageState extends State<LoginPage> {
   Future<void> _verifyPhoneNumber() async {
     // Validar que el número de teléfono no esté vacío
     // TODO: No ejecutar la espera si el número de teléfono está vacío
+    // TODO: Solicitar confirmación al usuario de si su teléfono está correcto o no
+    // TODO: Asegurarse que sean 10 dígitos o cancelar la operación
+    // TODO: Cambiar la caja de texto para que solo acepte números, usando teclado numérico
     if (_phoneNumberController.text.isEmpty) {
       //Show alert dialog
       await showDialog(
