@@ -115,9 +115,6 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                   onPressed: () async {
                     // Acciones al presionar el botón
                     debugPrint('Botón presionado');
-                    AuthCheckState().setLoginStatus(false);
-                    await UserAuth().signOut();
-                    if (!mounted) return;
                     await showAdaptiveDialog<void>(
                       context: context,
                       builder: (BuildContext context) {
@@ -136,6 +133,8 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                         );
                       },
                     );
+                    AuthCheckState().setLoginStatus(false);
+                    await UserAuth().signOut();
                     if (!mounted) return;
                     Navigator.pushReplacement(
                       context,
