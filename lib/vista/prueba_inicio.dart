@@ -1,3 +1,5 @@
+import 'package:custodes/modelo/db.dart';
+import 'package:custodes/vista/inicio.dart';
 import 'package:flutter/material.dart';
 
 class MyPruebaWidget extends StatefulWidget {
@@ -91,7 +93,8 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                 ),
               ),
               Positioned(
-                left: screenSize.width *0.35, // Ajuste según el ancho de la pantalla
+                left: screenSize.width *
+                    0.35, // Ajuste según el ancho de la pantalla
                 top: screenSize.height * (containerHeight + 0.01),
                 child: Container(
                   width: screenSize.width * 0.3,
@@ -105,16 +108,43 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                 ),
               ),
               Positioned(
-              // Posición del botón, arriba del último contenedor
-              left: screenSize.width * 0.4,
-              top: screenSize.height * (1 - containerHeight) - 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Acciones al presionar el botón
-                  debugPrint('Botón presionado');
-                },
-                child: const Text('Presionar'),
-              ),
+                // Posición del botón, arriba del último contenedor
+                left: screenSize.width * 0.4,
+                top: screenSize.height * (1 - containerHeight) - 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // Acciones al presionar el botón
+                    debugPrint('Botón presionado');
+                    AuthCheckState().setLoginStatus(false);
+                    await UserAuth().signOut();
+                    if (!mounted) return;
+                    await showAdaptiveDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog.adaptive(
+                          title: const Text('Gracias por utilizar Custodes!'),
+                          content: const Text(
+                              'Esperamos que hayas tenido una buena experiencia. ¡Hasta luego!'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Nos vemos!'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    if (!mounted) return;
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AuthCheck()),
+                    );
+                  },
+                  child: const Text('Cerrar sesión'),
+                ),
               ),
             ],
           ),

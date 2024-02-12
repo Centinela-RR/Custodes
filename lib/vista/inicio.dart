@@ -1,7 +1,6 @@
 import 'package:custodes/vista/login.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainApp extends StatelessWidget {
@@ -48,6 +47,12 @@ class AuthCheckState extends State<AuthCheck> {
     });
   }
 
+  void setLoginStatus(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', value);
+    updateLoginStatus();
+  }
+
   Future<bool> getLoginStatus() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('isLoggedIn') ?? false;
@@ -55,7 +60,7 @@ class AuthCheckState extends State<AuthCheck> {
 
   @override
   Widget build(BuildContext context) {
-    getLoginStatus();
+    updateLoginStatus();
     if (_isLoggedIn) {
       debugPrint('Entró a InicioPage');
       return const MyPruebaWidget(); // Mostrar la pantalla de inicio

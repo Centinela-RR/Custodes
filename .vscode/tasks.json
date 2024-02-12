@@ -6,7 +6,7 @@
     {
       "label": "Make IPA",
       "type": "shell",
-      "command": "flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
+      "command": "rm -rdf build/ios/archive/Runner.xcarchive && flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
       "group": "build"
     },
     {

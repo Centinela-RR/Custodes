@@ -14,20 +14,21 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
 
-  const bool useEmulator = true;
+  const bool useEmulator = false;
+  const String host = "10.0.0.8";
 
+  // ignore: dead_code
   if (useEmulator) {
     // [Authentication | localhost:9099]
-    await FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
+    await FirebaseAuth.instance.useAuthEmulator(host, 9099);
 
     // Setting the emulator after a hot restart breaks Firestore.
     // See: https://github.com/FirebaseExtended/flutterfire/issues/6216
 
     // [Firestore | localhost:8080]
     try {
-      FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
+      FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
     } catch (error) {
       // throws a JavaScript object instead of a FirebaseException
       final String code = (error as dynamic).code;
