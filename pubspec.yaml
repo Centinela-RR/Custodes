@@ -9,7 +9,7 @@ publish_to: 'none'
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 # Prealpha, up until 0.1
-version: 0.0.3+1
+version: 0.0.4+1
 
 environment:
   sdk: '^3.2.4'
@@ -32,15 +32,21 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.17.3
   cloud_firestore: ^4.15.3
-  # shared_preferences guarda un indicador en el almacenamiento local
+
+  # shared_preferences: Almacenamiento local de preferencias en el dispositivo
   shared_preferences: ^2.2.2
   
-  # Splashscreen - easy to implement
+  # Splashscreen - Fácil de usar
   another_flutter_splash_screen: ^1.2.0
   
-  # Cool page transitions
+  # Transiciones de pantalla actualmente no utilizadas
   page_transition: ^2.1.0
+
+  # ID único, no utilizado más que para pruebas
   uuid: ^4.3.3
+
+  # Formateador de texto para números de teléfono
+  flutter_multi_formatter: ^2.12.4
   
 dev_dependencies:
   flutter_test:

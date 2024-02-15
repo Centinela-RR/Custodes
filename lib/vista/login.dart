@@ -2,6 +2,8 @@ import 'package:custodes/controlador/sistema/auth.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart'
+    show MaskedInputFormatter, toNumericString;
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,10 +34,9 @@ class LoginPageState extends State<LoginPage> {
   Future<void> _verifyPhoneNumber() async {
     // No ejecuta la espera si el número de teléfono está vacío, contiene texto o son menos de 10 dígitos
     // La caja de texto solo acepta números, usando teclado numérico
-    if (!_phoneNumberController.text.contains('Reenviar')) {
-      auth
-          .signInWithPhone(phoneNumber: _phoneNumberController.text)
-          .catchError((error) {
+    String phone = toNumericString(_phoneNumberController.text);
+    if (!phone.contains('Reenviar')) {
+      auth.signInWithPhone(phoneNumber: phone).catchError((error) {
         // Si encuentra una excepción, imprime el error y muestra un diálogo de alerta
         debugPrint(error.toString());
         showAdaptiveDialog(
@@ -146,6 +147,9 @@ class LoginPageState extends State<LoginPage> {
                   prefixText: '+52 '),
               // Cambiar el teclado a numérico
               keyboardType: TextInputType.phone,
+              // Limitar la longitud del número de teléfono a 10 dígitos
+              inputFormatters: [MaskedInputFormatter('(###) ### - ####')],
+              maxLength: 16,
             ),
             const SizedBox(height: 16.0),
             TextField(
@@ -232,6 +236,12 @@ class BtnSmsState extends State<BtnSms> {
     return true;
   }
 
+  String formatPhoneNumber(String phone) {
+    phone = toNumericString(phone);
+    if (phone.length < 10) return phone;
+    return '+52 (${phone.substring(0, 3)}) ${phone.substring(3, 6)} - ${phone.substring(6)}';
+  }
+
   // Solicitar confirmación al usuario de si su teléfono está correcto o no
   Future<bool> confirmPhoneNumber() async {
     bool? result = await showAdaptiveDialog<bool>(
@@ -244,7 +254,7 @@ class BtnSmsState extends State<BtnSms> {
             child: ListBody(
               children: <Widget>[
                 const Text('Es este su número de teléfono?'),
-                Text(widget.phoneController.text),
+                Text(formatPhoneNumber(widget.phoneController.text)),
               ],
             ),
           ),
@@ -256,7 +266,7 @@ class BtnSmsState extends State<BtnSms> {
               },
             ),
             TextButton(
-              child: const Text('Yes'),
+              child: const Text('Sí'),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
@@ -276,7 +286,8 @@ class BtnSmsState extends State<BtnSms> {
       onPressed: _isButtonDisabled
           ? null
           : () async {
-              if (!isValidPhoneNumber(widget.phoneController.text)) {
+              String phone = toNumericString(widget.phoneController.text);
+              if (!isValidPhoneNumber(phone)) {
                 //Show alert dialog with an error
                 await showAdaptiveDialog(
                   context: context,
