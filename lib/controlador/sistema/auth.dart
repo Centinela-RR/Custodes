@@ -100,7 +100,7 @@ class UserAuth {
     }
 
     verificationFailed(FirebaseAuthException authException) {
-      debugPrint('${authException.message}');
+      throw Exception(authException.message);
     }
 
     codeAutoRetrievalTimeout(String verificationId) {

@@ -1,5 +1,6 @@
 import 'package:custodes/controlador/sistema/auth.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -29,33 +30,34 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _verifyPhoneNumber() async {
-    // TODO: No ejecutar la espera si el número de teléfono está vacío
-    // TODO: Solicitar confirmación al usuario de si su teléfono está correcto o no
-    // TODO: Asegurarse que sean 10 dígitos o cancelar la operación
-    // TODO: Cambiar la caja de texto para que solo acepte números, usando teclado numérico
-    if (_phoneNumberController.text.isEmpty) {
-      //Show alert dialog
-      await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog.adaptive(
-            title: const Text('Error'),
-            content:
-                const Text('Por favor introduzca un número de teléfono válido'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-      return;
+    // No ejecuta la espera si el número de teléfono está vacío, contiene texto o son menos de 10 dígitos
+    // La caja de texto solo acepta números, usando teclado numérico
+    if (!_phoneNumberController.text.contains('Reenviar')) {
+      auth
+          .signInWithPhone(phoneNumber: _phoneNumberController.text)
+          .catchError((error) {
+        // Si encuentra una excepción, imprime el error y muestra un diálogo de alerta
+        debugPrint(error.toString());
+        showAdaptiveDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog.adaptive(
+              title: const Text('Error'),
+              content: const Text(
+                  'Ha sucedido un error, por favor asegúrese de contar con una conexión a internet estable y vuelva a intentarlo más tarde.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      });
     }
-    auth.signInWithPhone(phoneNumber: _phoneNumberController.text);
   }
 
   Future<void> _signInWithPhoneNumber() async {
@@ -140,17 +142,26 @@ class LoginPageState extends State<LoginPage> {
               controller: _phoneNumberController,
               decoration: const InputDecoration(
                   labelText: 'Número celular',
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: Icon(CupertinoIcons.phone_fill),
                   prefixText: '+52 '),
+              // Cambiar el teclado a numérico
+              keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _smsCodeController,
               decoration: const InputDecoration(
-                  labelText: 'Código SMS', prefixIcon: Icon(Icons.sms)),
+                  labelText: 'Código SMS',
+                  prefixIcon: Icon(CupertinoIcons.bubble_left_fill)),
+              keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 16.0),
-            BtnSms(onButtonPressed: _verifyPhoneNumber),
+            // Botón para enviar SMS
+            BtnSms(
+                // Función que se ejecuta al presionar el botón
+                onButtonPressed: _verifyPhoneNumber,
+                // Controlador del número de teléfono
+                phoneController: _phoneNumberController),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: _signInWithPhoneNumber,
@@ -163,9 +174,14 @@ class LoginPageState extends State<LoginPage> {
   }
 }
 
+// Widget para el botón de enviar SMS
 class BtnSms extends StatefulWidget {
   final VoidCallback onButtonPressed;
-  const BtnSms({super.key, required this.onButtonPressed});
+  final TextEditingController phoneController;
+  const BtnSms(
+      {super.key,
+      required this.onButtonPressed,
+      required this.phoneController});
 
   @override
   BtnSmsState createState() => BtnSmsState();
@@ -177,6 +193,7 @@ class BtnSmsState extends State<BtnSms> {
   bool _isButtonDisabled = false;
   String _buttonText = 'Enviar código SMS';
 
+  // Empieza el temporizador donde se deshabilita el botón por 60 segundos
   void startTimer() {
     _isButtonDisabled = true;
     _timer = Timer.periodic(
@@ -206,17 +223,95 @@ class BtnSmsState extends State<BtnSms> {
     super.dispose();
   }
 
+  // Verifica si el número de teléfono está vacío, contiene texto o son menos de 10 dígitos
+  bool isValidPhoneNumber(String input) {
+    final RegExp regex = RegExp(r'^\+?[1-9]\d{1,14}$');
+    if (input.isEmpty || input.length < 10 || !regex.hasMatch(input)) {
+      return false;
+    }
+    return true;
+  }
+
+  // Solicitar confirmación al usuario de si su teléfono está correcto o no
+  Future<bool> confirmPhoneNumber() async {
+    bool? result = await showAdaptiveDialog<bool>(
+      context: context,
+      barrierDismissible: false, // User must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog.adaptive(
+          title: const Text('Confirmar número de teléfono'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                const Text('Es este su número de teléfono?'),
+                Text(widget.phoneController.text),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    // If result is null, return false. Otherwise, return the result.
+    return result ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: _isButtonDisabled
           ? null
-          : () {
-              widget.onButtonPressed();
+          : () async {
+              if (!isValidPhoneNumber(widget.phoneController.text)) {
+                //Show alert dialog with an error
+                await showAdaptiveDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog.adaptive(
+                      title: const Text('Error'),
+                      content: const Text(
+                          'Por favor introduzca un número de teléfono válido'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                return;
+              }
+              // Si todo sale bien, pedir confirmación
+              bool result = await confirmPhoneNumber();
+              if (!result) {
+                return;
+              }
+
+              // Se establece el temporizador y se establece el estado del botón
               setState(() {
                 _start = 60;
                 _buttonText = 'Reenviar código en $_start';
               });
+              // Se ejecuta la función que se pasa como parámetro
+              widget.onButtonPressed();
+              // Se inicia el temporizador
               startTimer();
             },
       child: Text(_buttonText),
