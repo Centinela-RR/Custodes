@@ -44,3 +44,8 @@ app.*.map.json
 
 # To delete secure info
 bfg.jar
+
+# Don't store apps
+Releases/*.apk
+Releases/*.ipa
+*.xcarchive
