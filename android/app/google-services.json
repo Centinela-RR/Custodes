@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "project_number": "***REMOVED***",
+    "project_number": "528581573998",
     "firebase_url": "https://custodes-97a6a-default-rtdb.firebaseio.com",
     "project_id": "custodes-97a6a",
     "storage_bucket": "custodes-97a6a.appspot.com"
@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:***REMOVED***:android:***REMOVED***",
+        "mobilesdk_app_id": "1:528581573998:android:69b72c6cfe5aa2a700157f",
         "android_client_info": {
           "package_name": "com.centinela.custodes"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "***REMOVED***"
+          "current_key": "AIzaSyDCOFvybDdGT0C6IJXIYHQE0dGbCY6o8eo"
         }
       ],
       "services": {

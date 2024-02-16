@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>***REMOVED***</string>
+	<string>AIzaSyBDJgBVybuThwVUXWh_dP3a6FddXBAeln0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>***REMOVED***</string>
+	<string>528581573998</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
@@ -25,7 +25,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:***REMOVED***:ios:***REMOVED***</string>
+	<string>1:528581573998:ios:e85e72c830391c4b00157f</string>
 	<key>DATABASE_URL</key>
 	<string>https://custodes-97a6a-default-rtdb.firebaseio.com</string>
 </dict>
