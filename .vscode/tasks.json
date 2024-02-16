@@ -18,7 +18,7 @@
     {
       "label": "Remove sensitive data",
       "type": "shell",
-      "command": "java -jar bfg.jar --replace-text ../sensitiveData.txt && git reflog expire --expire=now --all && git gc --prune=now --aggressive && git push --force",
+      "command": "git pull origin app-prealpha && git add . && git commit -m 'Remove sensitive data - pre-commit' && git push origin app-prealpha && java -jar bfg.jar --replace-text ../sensitiveData.txt && git reflog expire --expire=now --all && git gc --prune=now --aggressive && git push --force",
       "group": "build"
     },
   ]

@@ -32,29 +32,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: ***REMOVED***,
+    apiKey: '***REMOVED***',
     appId: '1:***REMOVED***:web:***REMOVED***',
-    messagingSenderId: ***REMOVED***,
+    messagingSenderId: '***REMOVED***',
     projectId: 'custodes-97a6a',
     authDomain: 'custodes-97a6a.firebaseapp.com',
     databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
     storageBucket: 'custodes-97a6a.appspot.com',
-    measurementId: ***REMOVED***,
+    measurementId: '***REMOVED***',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: ***REMOVED***,
+    apiKey: '***REMOVED***',
     appId: '1:***REMOVED***:android:***REMOVED***',
-    messagingSenderId: ***REMOVED***,
+    messagingSenderId: '***REMOVED***',
     projectId: 'custodes-97a6a',
     databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
     storageBucket: 'custodes-97a6a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: ***REMOVED***,
+    apiKey: '***REMOVED***',
     appId: '1:***REMOVED***:ios:***REMOVED***',
-    messagingSenderId: ***REMOVED***,
+    messagingSenderId: '***REMOVED***',
     projectId: 'custodes-97a6a',
     databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
     storageBucket: 'custodes-97a6a.appspot.com',
