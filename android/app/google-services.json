@@ -13,7 +13,12 @@
           "package_name": "com.centinela.custodes"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "***REMOVED***-i2etsqlskjdiui0hm906cfbrb71qqc43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
@@ -21,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "***REMOVED***-i2etsqlskjdiui0hm906cfbrb71qqc43.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "***REMOVED***-juacckc3inmo2ahh7kbt6llscnjgkamh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.centinela.custodes"
+              }
+            }
+          ]
         }
       }
     }
