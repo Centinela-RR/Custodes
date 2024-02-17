@@ -36,4 +36,3 @@ muestras, orientación sobre desarrollo móvil y una referencia completa de la A
     - Opcional:
       - Figma for VS Code (permite enlazar cuenta de Figma para ver cambios de diseño)
       - GitLens (permite visualizar cambios realizados por quién)
-.
