@@ -16,13 +16,14 @@ class DebugAppState extends State<DebugApp> {
   FirebaseConnection fb = FirebaseConnection();
   Reportes reportes = Reportes();
   late Timer timer;
+  bool _buttonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     widgetTitle = ''; // Initial value
     uniqId = 'b'; // Initial value
-    startTimer();
+    //startTimer();
   }
 
   void startTimer() {
@@ -53,7 +54,7 @@ class DebugAppState extends State<DebugApp> {
             Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SpinningCylinder(), // This for a spinning bean
+            //const SpinningCylinder(), // This for a spinning bean, fucks up the emulator - Slow af
             const SizedBox(height: 20), // Add some spacing
             const Row(
               mainAxisSize: MainAxisSize.min,
@@ -77,36 +78,47 @@ class DebugAppState extends State<DebugApp> {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    uniqId = fb.generateLocalIdentifier();
+                    //String usuario = fb.getUsuario();
+                    String usuario = 'test';
+                    String ubicacionTr = 'test2';
+                    int reporteType = 6;
+                    reportes.generarReporte(
+                        idUsuario: usuario,
+                        ubicacion: ubicacionTr,
+                        tipoReporte: reporteType);
+                    //fb.addNewElement();
+                    _showAlertDialog(
+                        context,
+                        'Información preparada para ser reportada exitosamente',
+                        'idUsuario: $usuario \nubicacion: $ubicacionTr \ntipoReporte: $reporteType');
                     setState(() {
-                      buttonTitle = "Preparar información";
-                      uniqId = fb.generateLocalIdentifier();
-                      reportes.generarReporte(
-                          idUsuario: 'test',
-                          ubicacion: 'test2',
-                          tipoReporte: 6);
+                      _buttonEnabled = true;
                     });
-                    fb.addNewElement();
-                    _showAlertDialog(context, buttonTitle, uniqId);
                   },
                   child: const Text("Preparar información"),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      buttonTitle = "Enviar información";
-                      uniqId = fb.generateLocalIdentifier();
-                    });
-                    String res = reportes.enviarReporte();
-                    if (!res.contains("Error")) {
-                      _showAlertDialog(context, "Success!",
-                          "Report sent succesfully! Result: $res");
-                    } else {
-                      _showAlertDialog(context, "Error", res);
-                    }
-                    //fb.fetchElement();
-                    _showAlertDialog(context, buttonTitle, uniqId);
-                  },
+                  // Está habilitado? Si no, no hace nada (null), si está habilitado ejecuta la función
+                  onPressed: _buttonEnabled
+                      ? () async {
+                          String res = await reportes.enviarReporte();
+                          if (!mounted) {
+                            return;
+                          }
+                          if (!res.contains("Error")) {
+                            _showAlertDialog(context, "Éxito!",
+                                "Reporte enviado satisfactoriamente!\nDetalles: \n$res");
+                          } else {
+                            _showAlertDialog(context, "Error", res);
+                          }
+                          setState(() {
+                            _buttonEnabled = false;
+                          });
+                          //fb.fetchElement();
+                        }
+                      : null,
                   child: const Text("Enviar información"),
                 ),
               ],
@@ -122,7 +134,7 @@ class DebugAppState extends State<DebugApp> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog.adaptive(
-          title: Text(buttonTitle),
+          title: Text(title),
           content: Text(message),
           actions: <Widget>[
             TextButton(

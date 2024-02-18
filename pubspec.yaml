@@ -36,6 +36,9 @@ dependencies:
   # Feedback: We should use this somehow
   # feedback: ^3.0.0
 
+  # Check if there's internet access
+  connectivity_wrapper: ^1.1.4 
+
   # shared_preferences: Almacenamiento local de preferencias en el dispositivo
   shared_preferences: ^2.2.2
   
