@@ -112,6 +112,7 @@ class DebugAppState extends State<DebugApp> {
                                 "Reporte enviado satisfactoriamente!\nDetalles: \n$res");
                           } else {
                             _showAlertDialog(context, "Error", res);
+                            return;
                           }
                           setState(() {
                             _buttonEnabled = false;
