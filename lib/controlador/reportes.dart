@@ -23,7 +23,7 @@ class Reportes {
   }
 
   // Enviar reporte a la db
-  String enviarReporte() {
+  Future<String> enviarReporte() async {
     // Guardar el JSON en la db
     // Enviar reporte
     try {
