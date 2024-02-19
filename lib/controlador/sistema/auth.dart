@@ -1,3 +1,4 @@
+//import 'package:custodes/vista/debug.dart' show DebugApp;
 import 'package:custodes/vista/login.dart' show LoginPage;
 
 import 'package:custodes/vista/prueba_inicio.dart' show MyPruebaWidget;
@@ -24,6 +25,9 @@ class AuthCheckState extends State<AuthCheck> {
   // Variable para controlar el estado de autenticación
   bool _isLoggedIn = false;
 
+  // A donde se va a ir después de la autenticación?
+  final Widget nextScreen = const MyPruebaWidget();
+
   // Método para actualizar el estado _isLoggedIn con el valor de las preferencias compartidas
   void updateLoginStatus() async {
     bool loginStatus = await getLoginStatus();
@@ -35,7 +39,13 @@ class AuthCheckState extends State<AuthCheck> {
   // Método para establecer el estado de autenticación en las preferencias compartidas
   void setLoginStatus(bool value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLoggedIn', value);
+    if (!value) {
+      prefs.remove('uid');
+      prefs.remove('isLoggedIn');
+    } else {
+      prefs.setString('uid', UserAuth().getUid() ?? '');
+      prefs.setBool('isLoggedIn', value);
+    }
     updateLoginStatus();
   }
 
@@ -76,7 +86,7 @@ class AuthCheckState extends State<AuthCheck> {
             _isLoggedIn = snapshot.data ?? false;
             if (_isLoggedIn) {
               debugPrint('Entró a InicioPage');
-              return const MyPruebaWidget(); // Mostrar la pantalla de inicio
+              return nextScreen; // Mostrar la pantalla de inicio
             } else {
               debugPrint('Entró a LoginPage');
               return const LoginPage(); // Mostrar la pantalla de acceso al sistema
@@ -126,10 +136,12 @@ class UserAuth {
     );
   }
 
-  String? uid() {
+  // Método para obtener el identificador único del usuario
+  String? getUid() {
     return _auth.currentUser?.uid;
   }
 
+  // Método para verificar el código de verificación
   Future<bool> verifyPhoneCode({required String smsCode}) async {
     final AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: _verificationId,
@@ -137,7 +149,7 @@ class UserAuth {
     );
     try {
       await _auth.signInWithCredential(credential);
-      debugPrint('Should go to the next screen by now! Usuario: ${uid()}');
+      debugPrint('Should go to the next screen by now! Usuario: ${getUid()}');
       return true;
     } catch (e) {
       debugPrint(e.toString());
@@ -145,7 +157,11 @@ class UserAuth {
     }
   }
 
+  // Método para cerrar la sesión del usuario
   Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('uid');
+    prefs.remove('isLoggedIn');
     await _auth.signOut();
   }
 }

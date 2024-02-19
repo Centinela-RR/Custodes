@@ -1,4 +1,5 @@
 import 'package:custodes/controlador/sistema/auth.dart';
+//import 'package:custodes/vista/debug.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  // ! This is the widget to show after login
+
+  // This is the widget to show after login
   final Widget afterLogin = const MyPruebaWidget();
 
   // User authentication controller
@@ -26,9 +28,12 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _smsCodeController = TextEditingController();
 
-  Future<void> persistLogin(bool value) async {
+  Future<void> persistLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLoggedIn', value);
+    String uid = UserAuth().getUid() ?? '';
+    if (uid.isEmpty) return;
+    prefs.setString('uid', uid);
+    prefs.setBool('isLoggedIn', true);
   }
 
   Future<void> _verifyPhoneNumber() async {
@@ -86,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
     }
     Future<bool> res = auth.verifyPhoneCode(smsCode: _smsCodeController.text);
     if (await res && context.mounted) {
-      persistLogin(true);
+      persistLogin();
       await showAdaptiveDialog(
           context: context,
           builder: (context) => AlertDialog.adaptive(
@@ -133,6 +138,7 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bienvenido!'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -192,7 +198,7 @@ class BtnSms extends StatefulWidget {
 }
 
 class BtnSmsState extends State<BtnSms> {
-  late Timer _timer;
+  Timer? _timer;
   int _start = 60;
   bool _isButtonDisabled = false;
   String _buttonText = 'Enviar código SMS';
@@ -223,7 +229,10 @@ class BtnSmsState extends State<BtnSms> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_timer?.isActive ?? false) {
+      _timer
+          ?.cancel(); // Cancel the timer if it got initialized to avoid memory leaks
+    }
     super.dispose();
   }
 
