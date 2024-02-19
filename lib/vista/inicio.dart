@@ -1,5 +1,4 @@
 import 'package:custodes/controlador/sistema/auth.dart';
-//import 'package:custodes/vista/debug.dart';
 import 'package:flutter/material.dart';
 
 class MainApp extends StatelessWidget {
@@ -15,7 +14,6 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      //home: const DebugApp(), // * Pruebas!
       home: const AuthCheck(), // * Verifica el estado de autenticación
     );
   }

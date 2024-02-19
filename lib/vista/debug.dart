@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:custodes/controlador/sistema/auth.dart';
 import 'package:flutter/material.dart';
 import '../modelo/db.dart';
 import 'package:custodes/controlador/reportes.dart';
@@ -11,17 +12,24 @@ class DebugApp extends StatefulWidget {
 }
 
 class DebugAppState extends State<DebugApp> {
+  // Firebase connection controller
+  FirebaseConnection fb = FirebaseConnection();
+
+  // User authentication controller
+  UserAuth auth = UserAuth();
+  // Reportes controller
+  Reportes reportes = Reportes();
+
   late String widgetTitle, uniqId;
   String buttonTitle = '';
-  FirebaseConnection fb = FirebaseConnection();
-  Reportes reportes = Reportes();
-  late Timer timer;
+  Timer? timer;
   bool _buttonEnabled = false;
 
   @override
   void initState() {
     super.initState();
-    widgetTitle = ''; // Initial value
+    debugPrint('Usuario: ${auth.getUid() ?? "null"}');
+    widgetTitle = 'Debug View'; // Initial value
     uniqId = 'b'; // Initial value
     //startTimer();
   }
@@ -38,7 +46,10 @@ class DebugAppState extends State<DebugApp> {
 
   @override
   void dispose() {
-    timer.cancel(); // Cancel the timer to avoid memory leaks
+    if (timer?.isActive ?? false) {
+      timer
+          ?.cancel(); // Cancel the timer if it got initialized to avoid memory leaks
+    }
     super.dispose();
   }
 
@@ -46,6 +57,7 @@ class DebugAppState extends State<DebugApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Custodes - Debug App',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text(widgetTitle),
@@ -80,7 +92,7 @@ class DebugAppState extends State<DebugApp> {
                   onPressed: () {
                     uniqId = fb.generateLocalIdentifier();
                     //String usuario = fb.getUsuario();
-                    String usuario = 'test';
+                    String usuario = auth.getUid() ?? 'null';
                     String ubicacionTr = 'test2';
                     int reporteType = 6;
                     reportes.generarReporte(
@@ -124,6 +136,44 @@ class DebugAppState extends State<DebugApp> {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    // Acciones al presionar el botón
+                    debugPrint('Botón presionado');
+                    await showAdaptiveDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog.adaptive(
+                          title: const Text('Gracias por utilizar Custodes!'),
+                          content: const Text(
+                              'Esperamos que hayas tenido una buena experiencia. ¡Hasta luego!'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Nos vemos!'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    await auth.signOut();
+                    if (!mounted) return;
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AuthCheck()),
+                    );
+                  },
+                  child: const Text('Cerrar sesión'),
+                ),
+              ],
+            )
           ],
         ),
       ),

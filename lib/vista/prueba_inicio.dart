@@ -12,6 +12,7 @@ class MyPruebaWidget extends StatefulWidget {
 //colores aun no determinados
 class MyPruebaWidgetState extends State<MyPruebaWidget> {
   double containerHeight = 0.3; // Altura inicial
+  UserAuth auth = UserAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +133,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                         );
                       },
                     );
-                    AuthCheckState().setLoginStatus(false);
-                    await UserAuth().signOut();
+                    await auth.signOut();
                     if (!mounted) return;
                     Navigator.pushReplacement(
                       context,
