@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-
   // This is the widget to show after login
   final Widget afterLogin = const MyPruebaWidget();
 

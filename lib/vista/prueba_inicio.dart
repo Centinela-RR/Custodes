@@ -23,6 +23,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Prueba Widget'),
+        automaticallyImplyLeading: false,
       ),
       body: GestureDetector(
         onVerticalDragUpdate: (details) {

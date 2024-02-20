@@ -1,11 +1,9 @@
-//import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custodes/vista/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'modelo/firebase_options.dart';
 import 'package:flutter/material.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +18,6 @@ Future<void> main() async {
   const bool useEmulator = true;
   const String host = "10.0.0.8";
 
-  // ignore: dead_code
   if (useEmulator) {
     // [Authentication | localhost:9099]
     await FirebaseAuth.instance.useAuthEmulator(host, 9099);
@@ -48,11 +45,15 @@ class StartApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Custodes',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       debugShowCheckedModeBanner: false,
       home:
-          SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+          const SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
     );
   }
 }
