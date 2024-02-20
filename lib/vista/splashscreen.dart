@@ -1,5 +1,5 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
-import 'package:custodes/vista/inicio.dart';
+import 'package:custodes/controlador/sistema/auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       gifHeight: 360,
       backgroundColor: const Color.fromARGB(255, 206, 229, 208),
       nextScreen:
-          const MainApp(), //* Al terminar la splashscreen, nos abre la vista especificada en inicio.dart
+          const AuthCheck(), //* Al terminar la splashscreen, nos abre el chequeo de autenticación
       duration: const Duration(milliseconds: 4500),
 
       onInit: () async {
