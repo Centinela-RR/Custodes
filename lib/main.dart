@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:custodes/vista/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +44,23 @@ Future<void> main() async {
 class StartApp extends StatelessWidget {
   const StartApp({super.key});
 
+  // Aquí empieza el chequeo de conectividad, supuestamente
+  @override
+  Widget build(BuildContext context) {
+    return ConnectivityAppWrapper(
+      app: MaterialApp(
+        title: 'Custodes',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home:
+            const SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+      ),
+    );
+  }
+  /*Original
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,7 +71,8 @@ class StartApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home:
-          const SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+          const SplashScreen(), // * Empezar con la splashscreen, en splashscreen.dart
     );
   }
+  */
 }

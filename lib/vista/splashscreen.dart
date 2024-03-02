@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       gifHeight: 360,
       backgroundColor: const Color.fromARGB(255, 206, 229, 208),
       nextScreen:
-          const AuthCheck(), //* Al terminar la splashscreen, nos abre el chequeo de autenticación
+          const AuthCheck(), // * Al terminar la splashscreen, nos abre el chequeo de autenticación
       duration: const Duration(milliseconds: 4500),
 
       onInit: () async {
