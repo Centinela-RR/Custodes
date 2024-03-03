@@ -141,7 +141,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                color: const Color(0xFFEEE0C7)),
+                color: Color.fromRGBO(238, 224, 199, 1)),
           ),
           Positioned.fill(
             left: screenSize.width * 0,
@@ -278,20 +278,17 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             ),
           ),
           Positioned(
-            left: screenSize.width * 0.40,
+            left: screenSize.width * 0.28,
             top: screenSize.height * 0.27,
             child: Container(
-              width: screenSize.width * 0.2,
-              height: screenSize.height * 0.1,
+              width: screenSize.width * 0.45,
+              height: screenSize.height * 0.15,
               decoration: const BoxDecoration(
+                color: Colors
+                    .transparent, // Establece el fondo del contenedor como transparente
                 image: DecorationImage(
                   image: AssetImage('assets/icons/icon.png'),
                   fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(
-                    Colors.transparent, // Color transparente para la imagen
-                    BlendMode
-                        .dst, // Mezcla de color para aplicar el filtro de transparencia
-                  ),
                 ),
               ),
             ),
