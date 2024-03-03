@@ -1,3 +1,4 @@
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:custodes/controlador/sistema/auth.dart';
 //import 'package:custodes/vista/debug.dart';
 import 'package:custodes/vista/prueba_inicio.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart'
     show MaskedInputFormatter, toNumericString;
 import 'dart:async';
+import 'package:custodes/controlador/sistema/widgets.dart' as syswid;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -134,52 +136,55 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bienvenido!'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _phoneNumberController,
-              decoration: const InputDecoration(
-                  labelText: 'Número celular',
-                  prefixIcon: Icon(CupertinoIcons.phone_fill),
-                  prefixText: '+52 '),
-              // Cambiar el teclado a numérico
-              keyboardType: TextInputType.phone,
-              // Limitar la longitud del número de teléfono a 10 dígitos
-              inputFormatters: [MaskedInputFormatter('(###) ### - ####')],
-              maxLength: 16,
+    return ConnectivityWidgetWrapper(
+        offlineWidget: syswid.Widgets.offlineMessage(context),
+        disableInteraction: true,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Bienvenido!'),
+            automaticallyImplyLeading: false,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: _phoneNumberController,
+                  decoration: const InputDecoration(
+                      labelText: 'Número celular',
+                      prefixIcon: Icon(CupertinoIcons.phone_fill),
+                      prefixText: '+52 '),
+                  // Cambiar el teclado a numérico
+                  keyboardType: TextInputType.phone,
+                  // Limitar la longitud del número de teléfono a 10 dígitos
+                  inputFormatters: [MaskedInputFormatter('(###) ### - ####')],
+                  maxLength: 16,
+                ),
+                const SizedBox(height: 16.0),
+                TextField(
+                  controller: _smsCodeController,
+                  decoration: const InputDecoration(
+                      labelText: 'Código SMS',
+                      prefixIcon: Icon(CupertinoIcons.bubble_left_fill)),
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 16.0),
+                // Botón para enviar SMS
+                BtnSms(
+                    // Función que se ejecuta al presionar el botón
+                    onButtonPressed: _verifyPhoneNumber,
+                    // Controlador del número de teléfono
+                    phoneController: _phoneNumberController),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: _signInWithPhoneNumber,
+                  child: const Text('Iniciar sesión'),
+                ),
+              ],
             ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _smsCodeController,
-              decoration: const InputDecoration(
-                  labelText: 'Código SMS',
-                  prefixIcon: Icon(CupertinoIcons.bubble_left_fill)),
-              keyboardType: TextInputType.phone,
-            ),
-            const SizedBox(height: 16.0),
-            // Botón para enviar SMS
-            BtnSms(
-                // Función que se ejecuta al presionar el botón
-                onButtonPressed: _verifyPhoneNumber,
-                // Controlador del número de teléfono
-                phoneController: _phoneNumberController),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _signInWithPhoneNumber,
-              child: const Text('Iniciar sesión'),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 

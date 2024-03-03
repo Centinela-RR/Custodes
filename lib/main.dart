@@ -56,23 +56,8 @@ class StartApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home:
-            const SplashScreen(), //* Empezar con la splashscreen, en splashscreen.dart
+            const SplashScreen(), // * Empezar con la splashscreen, en splashscreen.dart
       ),
     );
   }
-  /*Original
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Custodes',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      debugShowCheckedModeBanner: false,
-      home:
-          const SplashScreen(), // * Empezar con la splashscreen, en splashscreen.dart
-    );
-  }
-  */
 }
