@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+//import 'package:flutter/src/foundation/key.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
 class Mapa extends StatefulWidget {
@@ -24,6 +23,19 @@ class Mapa extends StatefulWidget {
 - Como integrar localizacion actual permanente sin que sea manual
 - ....
 */
+
+// Orden de tareas para avanzar algo.
+/*  
+    * 1. Establecer el subdominio correcto
+    * 2. Averiguar sobre los controles del mapa (es incomodo de usar con dos dedos asi que se debe eliminar la rotacion de preferencia (Pedir opinion al grupo))
+    * 3. Eliminar botones que no son necesarios.
+    * 4. Capturar las ubicaciones
+    * 5. Enviar los datos a la BD
+    ! Revisar como lograr que los dispositivos por defecto tenga usar ubicacion en tiempo real siempre.
+    ?. Integrar al proyecto principal
+    ?. Modificar carpetas del proyecto para tener mejor control
+*/
+
 class _MapaState extends State<Mapa> {
   String address = '';
   @override
