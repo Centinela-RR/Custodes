@@ -1,10 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        ColorScheme,
+        Colors,
+        MaterialApp,
+        StatelessWidget,
+        ThemeData,
+        Widget,
+        WidgetsFlutterBinding,
+        runApp;
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:custodes/vista/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'modelo/firebase_options.dart';
-import 'package:flutter/material.dart';
+import 'package:custodes/modelo/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

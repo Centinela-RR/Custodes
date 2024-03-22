@@ -1,6 +1,38 @@
-import 'package:connectivity_wrapper/connectivity_wrapper.dart';
-import 'package:custodes/controlador/sistema/auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AnimatedContainer,
+        AppBar,
+        BoxDecoration,
+        BuildContext,
+        Clip,
+        Color,
+        Colors,
+        Column,
+        Container,
+        Curves,
+        GestureDetector,
+        Icon,
+        IconButton,
+        Icons,
+        ListTile,
+        MainAxisAlignment,
+        MaterialPageRoute,
+        Matrix4,
+        MediaQuery,
+        Navigator,
+        Positioned,
+        Scaffold,
+        Size,
+        Stack,
+        State,
+        StatefulWidget,
+        Text,
+        Widget,
+        showModalBottomSheet;
+import 'package:connectivity_wrapper/connectivity_wrapper.dart'
+    show ConnectivityWidgetWrapper;
+import 'package:custodes/controlador/sistema/auth.dart'
+    show AuthCheck, UserAuth;
 import 'package:custodes/controlador/sistema/widgets.dart' as syswid;
 import 'package:custodes/controlador/sistema/general.dart' as sysfun;
 

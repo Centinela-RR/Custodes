@@ -1,4 +1,24 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Align,
+        Alignment,
+        BorderRadius,
+        BoxDecoration,
+        BuildContext,
+        Center,
+        CircularProgressIndicator,
+        Colors,
+        Container,
+        EdgeInsets,
+        LinearGradient,
+        MediaQuery,
+        Opacity,
+        Padding,
+        Stack,
+        Text,
+        TextAlign,
+        TextStyle,
+        Widget;
 
 class Widgets {
   static Widget offlineMessage(BuildContext context) {

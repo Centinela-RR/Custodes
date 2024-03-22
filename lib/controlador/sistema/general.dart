@@ -1,4 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AlertDialog,
+        BuildContext,
+        Navigator,
+        Text,
+        TextButton,
+        Widget,
+        showAdaptiveDialog;
 
 class Functions {
   void showAlertDialog(BuildContext context, String title, String message,

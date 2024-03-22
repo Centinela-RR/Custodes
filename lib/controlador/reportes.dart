@@ -1,9 +1,16 @@
-import 'dart:async';
+import 'dart:async' show Future;
 import 'dart:convert' show jsonEncode;
 
 import 'package:custodes/controlador/sistema/auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart' show CupertinoIcons;
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        CircleBorder,
+        EdgeInsets,
+        ElevatedButton,
+        Icon,
+        debugPrint;
 
 import 'package:custodes/controlador/sistema/general.dart' as sysfunc;
 
