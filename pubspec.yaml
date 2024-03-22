@@ -53,6 +53,12 @@ dependencies:
 
   # Formateador de texto para números de teléfono
   flutter_multi_formatter: ^2.12.4
+
+  # Mapas
+  flutter_map: ^6.1.0
+  flutter_map_location_marker: ^8.0.8
+  latlong2: ^0.9.0
+  geolocator: ^11.0.0
   
 dev_dependencies:
   flutter_test:
