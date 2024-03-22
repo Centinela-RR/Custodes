@@ -141,7 +141,7 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                color: Color.fromRGBO(238, 224, 199, 1)),
+                color: const Color.fromRGBO(238, 224, 199, 1)),
           ),
           Positioned.fill(
             left: screenSize.width * 0,
