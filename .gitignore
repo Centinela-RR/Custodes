@@ -45,6 +45,12 @@ app.*.map.json
 # To delete secure info
 bfg.jar
 
+# To hide secure info
+*.env
+
+# Not passing node_modules
+node_modules/
+
 # Don't store apps
 Releases/*.apk
 Releases/*.ipa
