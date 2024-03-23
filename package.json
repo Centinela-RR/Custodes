@@ -4,6 +4,6 @@
     "plist": "^3.1.0"
   },
   "scripts": {
-    "buildSecret": "node generate-config.js"
+    "build": "node generate-config.js"
   }
 }

@@ -48,8 +48,9 @@ dependencies:
   # Transiciones de pantalla actualmente no utilizadas
   page_transition: ^2.1.0
 
-  # ID único, no utilizado más que para pruebas
+  # Seguridad
   uuid: ^4.3.3
+  flutter_dotenv: ^5.1.0
 
   # Formateador de texto para números de teléfono
   flutter_multi_formatter: ^2.12.4
@@ -64,7 +65,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
-  flutter_dotenv: ^5.1.0 
 
 
 # The following section is specific to Flutter packages.
@@ -72,6 +72,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - .env
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
