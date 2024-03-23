@@ -2,11 +2,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 const fs = require('fs');
 const plist = require('plist');
+const ipAddress = process.env.TEST_HOST ?? "localhost";
 
 const ios = {
   CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}.apps.googleusercontent.com`,
   REVERSED_CLIENT_ID: `com.googleusercontent.apps.${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}`,
-  API_KEY: process.env.API_KEY,
+  API_KEY: process.env.API_KEY_IOS,
   GCM_SENDER_ID: process.env.GCM_SENDER_ID,
   PLIST_VERSION: '1',
   BUNDLE_ID: process.env.PACKAGE_NAME,
@@ -44,7 +45,7 @@ const android = {
       ],
       "api_key": [
         {
-          "current_key": process.env.API_KEY
+          "current_key": process.env.API_KEY_ANDROID
         }
       ],
       "services": {
@@ -69,8 +70,24 @@ const android = {
   "configuration_version": "1"
 };
 
+
+
+const androidSecurityConfig = `
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">${ipAddress}</domain>
+    </domain-config>
+</network-security-config>
+`;
+
+// Write the config to the respective files
+
+// iOS Google Services
+fs.writeFileSync('ios/GoogleService-Info.plist', plist.build(ios));
+
+// Android Google Services
 fs.writeFileSync('android/app/google-services.json', JSON.stringify(android, null, 2));
 
-const xml = plist.build(ios);
-
-fs.writeFileSync('ios/GoogleService-Info.plist', xml);
+// Android Network Security Config
+const xmlFilePath = 'android/app/src/main/res/xml/network_security_config.xml';
+fs.writeFileSync(xmlFilePath, androidSecurityConfig);
