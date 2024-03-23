@@ -4,6 +4,10 @@ const fs = require('fs');
 const plist = require('plist');
 const ipAddress = process.env.TEST_HOST ?? "localhost";
 
+// Define the 'unsafe' option
+const unsafe = process.env.npm_config_unsafe === 'true' || process.env.UNSAFE === 'true' || process.env.NODE_ENV === 'development';
+
+// iOS
 const ios = {
   CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}.apps.googleusercontent.com`,
   REVERSED_CLIENT_ID: `com.googleusercontent.apps.${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}`,
@@ -22,6 +26,7 @@ const ios = {
   DATABASE_URL: `https://${process.env.PROJECT_ID}-default-rtdb.firebaseio.com`,
 };
 
+// Android
 const android = {
   "project_info": {
     "project_number": process.env.GCM_SENDER_ID,
@@ -70,8 +75,6 @@ const android = {
   "configuration_version": "1"
 };
 
-
-
 const androidSecurityConfig = `
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
@@ -80,14 +83,51 @@ const androidSecurityConfig = `
 </network-security-config>
 `;
 
+// START_BLOCK: Fixing flutter_compass issue
+
+// Define the namespace
+const namespace = "namespace 'com.hemanthraj.fluttercompass'";
+
+// Define the path to the build.gradle file
+const gradleFilePath = 'ios/.symlinks/plugins/flutter_compass/android/build.gradle';
+
+// Read the existing content of the build.gradle file
+const gradleContent = fs.readFileSync(gradleFilePath, 'utf8');
+
+// Define the pattern to match
+const pattern = /android \{\n    compileSdkVersion/g;
+
+// Check if the pattern matches
+let updatedGradleContent = '';
+if (pattern.test(gradleContent)) {
+  // If the pattern matches, insert the namespace line
+  updatedGradleContent = gradleContent.replace(pattern, `android {\n    ${namespace}\n    compileSdkVersion`);
+} else if (unsafe) {
+  // If the 'unsafe' option is set, replace the entire 'android' block
+  updatedGradleContent = gradleContent.replace(/android \{[\s\S]*\}/g, `android {\n    ${namespace}\n    compileSdkVersion 30\n    defaultConfig {\n        minSdkVersion 20\n        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"\n    }\n    lintOptions {\n        disable 'InvalidPackage'\n    }\n}`);
+}
+
+if (updatedGradleContent) {
+  fs.writeFileSync(gradleFilePath, updatedGradleContent);
+}
+
+// END_BLOCK: End of fixing flutter_compass issue
+
+
 // Write the config to the respective files
 
 // iOS Google Services
-fs.writeFileSync('ios/GoogleService-Info.plist', plist.build(ios));
+if (unsafe || !fs.existsSync('ios/GoogleService-Info.plist')) {
+  fs.writeFileSync('ios/GoogleService-Info.plist', plist.build(ios));
+}
 
 // Android Google Services
-fs.writeFileSync('android/app/google-services.json', JSON.stringify(android, null, 2));
+if (unsafe || !fs.existsSync('android/app/google-services.json')) {
+  fs.writeFileSync('android/app/google-services.json', JSON.stringify(android, null, 2));
+}
 
 // Android Network Security Config
 const xmlFilePath = 'android/app/src/main/res/xml/network_security_config.xml';
-fs.writeFileSync(xmlFilePath, androidSecurityConfig);
+if (unsafe || !fs.existsSync(xmlFilePath)) {
+  fs.writeFileSync(xmlFilePath, androidSecurityConfig);
+}
