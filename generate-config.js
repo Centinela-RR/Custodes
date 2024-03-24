@@ -109,9 +109,6 @@ const namespace = "namespace 'com.hemanthraj.fluttercompass'";
 // Define the path to the build.gradle file
 const gradleFilePath = 'ios/.symlinks/plugins/flutter_compass/android/build.gradle';
 
-// Read the existing content of the build.gradle file
-const gradleContent = fs.readFileSync(gradleFilePath, 'utf8');
-
 // Define the pattern to match
 const pattern = /android \{\n    compileSdkVersion/g;
 
@@ -120,6 +117,9 @@ const iosSymlinksDir = 'ios/.symlinks';
 if (!fs.existsSync(iosSymlinksDir) || !fs.lstatSync(iosSymlinksDir).isDirectory()) {
   console.log("ios/.symlinks directory does not exist or is not a directory. Ignoring.");
 } else {
+  // Read the existing content of the build.gradle file
+  const gradleContent = fs.readFileSync(gradleFilePath, 'utf8');
+
   let updatedGradleContent = '';
   
   // Check if the pattern matches

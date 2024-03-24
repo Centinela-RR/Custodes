@@ -4,22 +4,30 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build IPA",
       "type": "shell",
+      "label": "Build IPA",
       "command": "npm run build && mkdir -p Releases && rm -rdf build/ios/archive/Runner.xcarchive && flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
       "group": "build"
     },
     {
-      "label": "Build APK",
       "type": "shell",
-      "command": "npm run build && mkdir -p Releases && flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk",
+      "label": "Build APK",
+      "command": "dotenv -- sh -c 'npm run build && mkdir -p Releases && flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk'",
       "group": "build"
     },
     {
-      "label": "Remove sensitive data",
       "type": "shell", 
+      "label": "Remove sensitive data",
       "command": "git pull origin app-prealpha && git add . && git commit -m 'Remove sensitive data - pre-commit' && git push origin app-prealpha && java -jar bfg.jar --replace-text ../sensitiveData.txt && git reflog expire --expire=now --all && git gc --prune=now --aggressive && git push --force",
       "group": "build"
     },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "node generate-config.js"
+    }
   ]
 }
