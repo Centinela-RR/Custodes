@@ -1,3 +1,4 @@
+import 'package:custodes/vista/map.dart';
 import 'package:flutter/material.dart'
     show
         AnimatedContainer,
@@ -122,7 +123,12 @@ class MyPruebaWidgetState extends State<MyPruebaWidget> {
                       title: const Text('Opción 1'),
                       onTap: () {
                         // Acciones cuando se selecciona la opción 1
-                        Navigator.pop(context);
+                        //Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MapBuild()),
+                        );
                       },
                     ),
                     ListTile(
