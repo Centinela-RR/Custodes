@@ -18,7 +18,6 @@ jobs:
         with:
           distribution: 'oracle' # See 'Supported distributions' for available options
           java-version: '21'
-      - run: java HelloWorldApp.java
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: build prod
