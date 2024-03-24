@@ -1,3 +1,7 @@
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.File
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -30,8 +34,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
+    namespace = "com.centinela.custodes"
     compileSdkVersion(34)
-    ndkVersion("26.2.11394342")
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -45,8 +49,10 @@ android {
     sourceSets["main"].java.srcDirs("src/main/kotlin")
 
     defaultConfig {
-        applicationId = "com.centinela.custodes"
         minSdkVersion(34)
+        ndk {
+            version = "26.2.11394342"
+        }
         //minSdkVersion flutter.minSdkVersion
         targetSdkVersion(34)
         versionCode = flutterVersionCode.toInt()
@@ -68,7 +74,7 @@ android {
 
             if (allFilesFromDir != null) {
                 val keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("keystore/centinela.jks")
+                keystoreFile.renameTo(File("keystore/centinela.jks"))
             }
 
             storeFile = file("keystore/centinela.jks")

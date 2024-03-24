@@ -19,9 +19,9 @@ allprojects {
     }
 }
 
-rootProject.buildDir = "../build"
+rootProject.buildDir = file("../build")
 subprojects {
-    buildDir = "${rootProject.buildDir}/${project.name}"
+    buildDir = file("${rootProject.buildDir}/${project.name}")
 }
 subprojects {
     evaluationDependsOn(":app")
