@@ -20,7 +20,13 @@ jobs:
           java-version: '21'
           cache: 'gradle'
       - name: build prod
-        run: ./gradlew app:bundleRelease
+        run: |
+          cd android
+          ./gradlew app:bundleRelease
+      - name: Move build outputs
+        run: |
+          mkdir -p Releases
+          mv android/app/build/outputs/* Releases/
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
