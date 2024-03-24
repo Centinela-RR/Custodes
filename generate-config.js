@@ -11,6 +11,7 @@ const unsafe = process.env.npm_config_unsafe === 'true' || process.env.UNSAFE ==
 const ios = {
   CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}.apps.googleusercontent.com`,
   REVERSED_CLIENT_ID: `com.googleusercontent.apps.${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}`,
+  ANDROID_CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID3}.apps.googleusercontent.com`,
   API_KEY: process.env.API_KEY_IOS,
   GCM_SENDER_ID: process.env.GCM_SENDER_ID,
   PLIST_VERSION: '1',
@@ -43,6 +44,22 @@ const android = {
         }
       },
       "oauth_client": [
+        {
+          "android_info" : {
+            "certificate_hash" : process.env.CERTIFICATE_HASH,
+            "package_name" : process.env.PACKAGE_NAME
+          },
+          "client_id" : `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID3}.apps.googleusercontent.com`,
+          "client_type" : 1
+        },
+        {
+          "android_info" : {
+            "certificate_hash" : process.env.DEBUG_CERTIFICATE_HASH,
+            "package_name" : process.env.PACKAGE_NAME
+          },
+          "client_id" : `${process.env.GCM_SENDER_ID}-${process.env.DEBUG_CLIENT_ID_3}.apps.googleusercontent.com`,
+          "client_type" : 1
+        },
         {
           "client_id": `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID}.apps.googleusercontent.com`,
           "client_type": 3

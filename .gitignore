@@ -54,6 +54,6 @@ android/app/src/main/res/xml/network_security_config.xml
 node_modules/
 
 # Don't store apps
-Releases/*.apk
-Releases/*.ipa
+*.apk
+*.ipa
 *.xcarchive
