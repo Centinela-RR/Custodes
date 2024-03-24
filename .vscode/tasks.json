@@ -12,7 +12,7 @@
     {
       "label": "Build APK",
       "type": "shell",
-      "command": "npm run build && mkdir -p Releases && flutter build apk && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk",
+      "command": "npm run build && mkdir -p Releases && flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk",
       "group": "build"
     },
     {
