@@ -222,7 +222,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = com;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = Centinela;
 				TargetAttributes = {
 					331C8080294A63A400263BE5 = {

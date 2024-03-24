@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const fs = require('fs');
 const plist = require('plist');
+const path = require('path');
 const ipAddress = process.env.TEST_HOST ?? "localhost";
 
 // Define the 'unsafe' option
@@ -114,18 +115,25 @@ const gradleContent = fs.readFileSync(gradleFilePath, 'utf8');
 // Define the pattern to match
 const pattern = /android \{\n    compileSdkVersion/g;
 
-// Check if the pattern matches
-let updatedGradleContent = '';
-if (pattern.test(gradleContent)) {
-  // If the pattern matches, insert the namespace line
-  updatedGradleContent = gradleContent.replace(pattern, `android {\n    ${namespace}\n    compileSdkVersion`);
-} else if (unsafe) {
-  // If the 'unsafe' option is set, replace the entire 'android' block
-  updatedGradleContent = gradleContent.replace(/android \{[\s\S]*\}/g, `android {\n    ${namespace}\n    compileSdkVersion 30\n    defaultConfig {\n        minSdkVersion 20\n        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"\n    }\n    lintOptions {\n        disable 'InvalidPackage'\n    }\n}`);
-}
+// Check if the ios/.symlinks directory exists
+const iosSymlinksDir = 'ios/.symlinks';
+if (!fs.existsSync(iosSymlinksDir) || !fs.lstatSync(iosSymlinksDir).isDirectory()) {
+  console.log("ios/.symlinks directory does not exist or is not a directory. Ignoring.");
+} else {
+  let updatedGradleContent = '';
+  
+  // Check if the pattern matches
+  if (pattern.test(gradleContent)) {
+    // If the pattern matches, insert the namespace line
+    updatedGradleContent = gradleContent.replace(pattern, `android {\n    ${namespace}\n    compileSdkVersion`);
+  } else if (unsafe) {
+    // If the 'unsafe' option is set, replace the entire 'android' block
+    updatedGradleContent = gradleContent.replace(/android \{[\s\S]*\}/g, `android {\n    ${namespace}\n    compileSdkVersion 30\n    defaultConfig {\n        minSdkVersion 20\n        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"\n    }\n    lintOptions {\n        disable 'InvalidPackage'\n    }\n}`);
+  }
 
-if (updatedGradleContent) {
-  fs.writeFileSync(gradleFilePath, updatedGradleContent);
+  if (updatedGradleContent) {
+    fs.writeFileSync(gradleFilePath, updatedGradleContent);
+  }
 }
 
 // END_BLOCK: End of fixing flutter_compass issue
@@ -145,6 +153,13 @@ if (unsafe || !fs.existsSync('android/app/google-services.json')) {
 
 // Android Network Security Config
 const xmlFilePath = 'android/app/src/main/res/xml/network_security_config.xml';
+const xmlFileDir = path.dirname(xmlFilePath);
+
+// Check if the directory exists, if not, create it
+if (!fs.existsSync(xmlFileDir)) {
+  fs.mkdirSync(xmlFileDir, { recursive: true });
+}
+
 if (unsafe || !fs.existsSync(xmlFilePath)) {
   fs.writeFileSync(xmlFilePath, androidSecurityConfig);
 }
