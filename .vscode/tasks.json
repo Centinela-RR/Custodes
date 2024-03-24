@@ -6,13 +6,13 @@
     {
       "label": "Build IPA",
       "type": "shell",
-      "command": "mkdir -p Releases && rm -rdf build/ios/archive/Runner.xcarchive && flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
+      "command": "npm run build && mkdir -p Releases && rm -rdf build/ios/archive/Runner.xcarchive && flutter build ipa && cd build/ios/archive/Runner.xcarchive/Products && mv Applications Payload && zip -r ../../../../../Releases/Custodes.ipa Payload/ && cd ../../ && rm -rd Runner.xcarchive",
       "group": "build"
     },
     {
       "label": "Build APK",
       "type": "shell",
-      "command": "mkdir -p Releases && flutter build apk && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk",
+      "command": "npm run build && mkdir -p Releases && flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk",
       "group": "build"
     },
     {

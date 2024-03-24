@@ -1,8 +1,7 @@
-import 'dart:async';
-import 'package:connectivity_wrapper/connectivity_wrapper.dart';
-import 'package:custodes/controlador/sistema/auth.dart';
-import 'package:flutter/material.dart';
-import '../modelo/db.dart';
+import 'package:connectivity_wrapper/connectivity_wrapper.dart' show ConnectivityWidgetWrapper;
+import 'package:custodes/controlador/sistema/auth.dart' show AuthCheck, UserAuth;
+import 'package:flutter/material.dart' show Align, Alignment, AnimationController, AppBar, BorderRadius, BoxDecoration, BuildContext, Colors, Column, Container, ElevatedButton, MainAxisAlignment, MainAxisSize, MaterialApp, MaterialPageRoute, Navigator, RotationTransition, Row, Scaffold, SingleTickerProviderStateMixin, SizedBox, State, StatefulWidget, Text, TextStyle, Widget, debugPrint;
+import 'package:custodes/modelo/db.dart' show FirebaseConnection;
 import 'package:custodes/controlador/reportes.dart' as reportes;
 import 'package:custodes/controlador/sistema/general.dart' as sysfunc;
 import 'package:custodes/controlador/sistema/widgets.dart' as syswid;
@@ -20,6 +19,7 @@ class DebugAppState extends State<DebugApp> {
 
   // User authentication controller
   UserAuth auth = UserAuth();
+
   // Reportes controller
   reportes.Functions repFun = reportes.Functions();
   reportes.Buttons repBut = reportes.Buttons();
@@ -27,7 +27,6 @@ class DebugAppState extends State<DebugApp> {
 
   late String widgetTitle, uniqId;
   String buttonTitle = '';
-  Timer? timer;
 
   @override
   void initState() {
@@ -35,26 +34,6 @@ class DebugAppState extends State<DebugApp> {
     debugPrint('Usuario: ${auth.getUid() ?? "null"}');
     widgetTitle = 'Debug View'; // Initial value
     uniqId = 'b'; // Initial value
-    //startTimer();
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(const Duration(milliseconds: 438), (timer) {
-      setState(() {
-        // Change the value of widgetTitle here
-        widgetTitle = widgetTitle == "Ku" ? "Chau" : "Ku";
-        //uniqId = fb.generateLocalIdentifier();
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    if (timer?.isActive ?? false) {
-      timer
-          ?.cancel(); // Cancel the timer if it got initialized to avoid memory leaks
-    }
-    super.dispose();
   }
 
   @override
@@ -161,7 +140,7 @@ class SpinningCylinderState extends State<SpinningCylinder>
         width: 100,
         height: 200,
         decoration: BoxDecoration(
-          color: Colors.blue, // You can adjust the color as needed
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(50),
         ),
       ),

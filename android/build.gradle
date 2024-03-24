@@ -7,9 +7,8 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // Add the dependency for the Google services Gradle plugin - wtf why it crash it all? Fuck firebase tutorials frfr
         classpath 'com.google.gms:google-services:4.4.1'
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.android.tools.build:gradle:8.3.1'
     }
 }
 

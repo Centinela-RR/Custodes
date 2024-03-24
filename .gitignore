@@ -42,10 +42,18 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# To delete secure info
-bfg.jar
+# To hide secure info
+*.env
+android/app/google-services.json
+ios/GoogleService-Info.plist
+
+# This file changes between environments
+android/app/src/main/res/xml/network_security_config.xml
+
+# Not passing node_modules
+node_modules/
 
 # Don't store apps
-Releases/*.apk
-Releases/*.ipa
+*.apk
+*.ipa
 *.xcarchive

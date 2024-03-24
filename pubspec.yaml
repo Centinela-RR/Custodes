@@ -9,7 +9,7 @@ publish_to: 'none'
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 # Prealpha, up until 0.1
-version: 0.0.4+1
+version: 0.0.6+1
 
 environment:
   sdk: '^3.2.4'
@@ -48,11 +48,18 @@ dependencies:
   # Transiciones de pantalla actualmente no utilizadas
   page_transition: ^2.1.0
 
-  # ID único, no utilizado más que para pruebas
+  # Seguridad
   uuid: ^4.3.3
+  flutter_dotenv: ^5.1.0
 
   # Formateador de texto para números de teléfono
   flutter_multi_formatter: ^2.12.4
+
+  # Mapas
+  flutter_map: ^6.1.0
+  flutter_map_location_marker: ^8.0.8
+  latlong2: ^0.9.0
+  geolocator: ^11.0.0
   
 dev_dependencies:
   flutter_test:
@@ -65,7 +72,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/icons/
+    - .env
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

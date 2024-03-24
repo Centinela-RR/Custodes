@@ -1,6 +1,7 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:custodes/controlador/sistema/auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show BuildContext, Color, StatelessWidget, Widget, debugPrint;
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
