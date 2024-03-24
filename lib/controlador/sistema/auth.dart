@@ -1,8 +1,8 @@
 //import 'package:custodes/vista/debug.dart' show DebugApp;
-
 import 'package:custodes/vista/login.dart' show LoginPage;
+import 'package:custodes/vista/map.dart' show MapBuild;
 
-import 'package:custodes/vista/prueba_inicio.dart' show MyPruebaWidget;
+//import 'package:custodes/vista/prueba_inicio.dart' show MyPruebaWidget;
 
 import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, PhoneAuthProvider, AuthCredential, FirebaseAuthException;
@@ -27,7 +27,8 @@ class AuthCheckState extends State<AuthCheck> {
   bool _isLoggedIn = false;
 
   // A donde se va a ir después de la autenticación?
-  final Widget nextScreen = const MyPruebaWidget();
+  final Widget nextScreen = const MapBuild();
+  //final Widget nextScreen = const MyPruebaWidget();
 
   // Método para actualizar el estado _isLoggedIn con el valor de las preferencias compartidas
   void updateLoginStatus() async {
@@ -79,7 +80,8 @@ class AuthCheckState extends State<AuthCheck> {
       future: getLoginStatus(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Mostrar un indicador de progreso en lo que se verifica el estado de autenticación
+          return const CircularProgressIndicator
+              .adaptive(); // Mostrar un indicador de progreso en lo que se verifica el estado de autenticación
         } else {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');

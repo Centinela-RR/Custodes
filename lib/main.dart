@@ -1,10 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        ColorScheme,
+        Colors,
+        MaterialApp,
+        StatelessWidget,
+        ThemeData,
+        Widget,
+        WidgetsFlutterBinding,
+        runApp;
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:custodes/vista/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'modelo/firebase_options.dart';
-import 'package:flutter/material.dart';
+import 'package:custodes/modelo/firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +28,10 @@ Future<void> main() async {
   // Emulador de Firebase: true para usar el emulador, false para usar la base de datos en la nube
   // No usar la nube porque +10 mensajes por mes cuestan dinero :'D
   const bool useEmulator = true;
-  const String host = "10.0.0.8";
 
   if (useEmulator) {
+    await dotenv.load();
+    final String host = dotenv.env["TEST_HOST"] ?? "localhost";
     // [Authentication | localhost:9099]
     await FirebaseAuth.instance.useAuthEmulator(host, 9099);
 

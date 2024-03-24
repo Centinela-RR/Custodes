@@ -22,23 +22,35 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-			<dict>
-					<key>CFBundleTypeRole</key>
-					<string>Editor</string>
-					<key>CFBundleURLSchemes</key>
-					<array>
-							<string>app-1-***REMOVED***-ios-***REMOVED***</string>
-					</array>
-			</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-***REMOVED***-ios-***REMOVED***</string>
+			</array>
+		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Custodes necesita tu ubicación para permitirte hacer reportes y notificarte de situaciones cercanas incluso fuera de la aplicación.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Custodes necesita tu ubicación siempre para poder notificarte de situaciones cercanas incluso fuera de la aplicación.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Custodes necesita tu ubicación para permitirte hacer reportes.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

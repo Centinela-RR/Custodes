@@ -1,11 +1,40 @@
-import 'package:connectivity_wrapper/connectivity_wrapper.dart';
-import 'package:custodes/controlador/sistema/auth.dart';
-//import 'package:custodes/vista/debug.dart';
-import 'package:custodes/vista/prueba_inicio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AlertDialog,
+        AppBar,
+        BuildContext,
+        Column,
+        EdgeInsets,
+        ElevatedButton,
+        Icon,
+        InputDecoration,
+        ListBody,
+        MainAxisAlignment,
+        MaterialPageRoute,
+        Navigator,
+        Padding,
+        Scaffold,
+        SingleChildScrollView,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Text,
+        TextButton,
+        TextEditingController,
+        TextField,
+        TextInputType,
+        VoidCallback,
+        Widget,
+        debugPrint,
+        showAdaptiveDialog;
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart'
     show MaskedInputFormatter, toNumericString;
+import 'package:custodes/vista/map.dart' show MapBuild;
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
+import 'package:custodes/controlador/sistema/auth.dart';
+// import 'package:custodes/vista/debug.dart';
+// import 'package:custodes/vista/prueba_inicio.dart';
+import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'dart:async';
 import 'package:custodes/controlador/sistema/widgets.dart' as syswid;
 
@@ -20,7 +49,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   // This is the widget to show after login
-  final Widget afterLogin = const MyPruebaWidget();
+  final Widget afterLogin = const MapBuild();
 
   // User authentication controller
   UserAuth auth = UserAuth();
