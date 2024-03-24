@@ -13,24 +13,34 @@ jobs:
           fileName: 'keystore/centinela.jks'
           encodedString: ${{ secrets.KEYSTORE }}
       - uses: actions/checkout@v4
-      - name: set up JDK 1.9
+      - name: set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - name: build prod
-        run: |
-          cd android
-          ./gradlew app:bundleRelease
-      - name: Move build outputs
-        run: |
-          mkdir -p Releases
-          mv android/app/build/outputs/* Releases/
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.9'
+      - name: Get dependencies
+        run: flutter pub get
+      #- run: flutter test
+      - name: Build APK
+        run: flutter build apk --release
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Build App Bundle
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: flutter build appbundle
+      - name: Move build outputs
+        run: |
+          mkdir -p Releases
+          mv android/app/build/outputs/* Releases/
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
