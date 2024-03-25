@@ -46,6 +46,7 @@ app.*.map.json
 *.env
 android/app/google-services.json
 ios/GoogleService-Info.plist
+lib/modelo/firebase_options.dart
 
 # This file changes between environments
 android/app/src/main/res/xml/network_security_config.xml
