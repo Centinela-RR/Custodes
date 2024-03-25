@@ -6,8 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Create keystore directory
-        run: mkdir -p android/app/keystore/
+      - uses: actions/checkout@v4.1.1
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2.4
@@ -15,7 +14,10 @@ jobs:
           fileName: 'centinela.jks'
           fileDir: './android/app/keystore/'
           encodedString: ${{ secrets.KEYSTORE }}
-      - uses: actions/checkout@v4.1.1
+      - name: List keystore directory
+        run: ls -l android/app/keystore/
+      - name: List supposed keystore directory
+        run: ls -l /home/runner/work/Custodes/Custodes/android/app/keystore/
       - name: Set up JDK 21
         uses: actions/setup-java@v4.2.1
         with:
