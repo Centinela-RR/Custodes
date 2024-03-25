@@ -8,7 +8,6 @@ import 'package:flutter/material.dart'
         ThemeData,
         Widget,
         WidgetsFlutterBinding,
-        debugPrint,
         runApp;
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
@@ -26,12 +25,8 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } catch (e) {
-    debugPrint("Error al inicializar Firebase: $e");
-    return;
+    throw ("Error al inicializar Firebase: $e");
   }
-  debugPrint("Firebase initialized successfully");
-  debugPrint('Firebase app name: ${Firebase.app().name}');
-  debugPrint('Firebase app options: ${Firebase.app().options}');
 
   // Emulador de Firebase: true para usar el emulador, false para usar la base de datos en la nube
   // No usar la nube porque +10 mensajes por mes cuestan dinero :'D
