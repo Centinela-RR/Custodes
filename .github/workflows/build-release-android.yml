@@ -32,8 +32,10 @@ jobs:
           cache: true
       - name: Get dependencies
         run: flutter pub get
-      - name: Fix garbage flutter_compass
+      - name: Fix garbage flutter_compass and make essential changes
         run: npm run build
+      - name: Print google-services.json
+        run: cat android/app/google-services.json
       - name: Build APK
         run: flutter build apk --release
         env:
