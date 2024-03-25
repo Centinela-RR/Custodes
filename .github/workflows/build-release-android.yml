@@ -12,7 +12,8 @@ jobs:
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2.4
         with:
-          fileName: 'android/app/keystore/centinela.jks'
+          fileName: 'centinela.jks'
+          fileDir: './android/app/keystore/'
           encodedString: ${{ secrets.KEYSTORE }}
       - name: Decode Keystore
         run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/keystore/centinela-Alt.jks
