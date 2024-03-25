@@ -6,6 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Create keystore directory
+        run: mkdir -p android/app/keystore/
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2.4
@@ -14,5 +16,3 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE }}
       - name: List keystore directory
         run: ls -l android/app/keystore/
-      - name: Testing another directory
-        run: ls -l Custodes/android/app/keystore/
