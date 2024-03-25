@@ -10,7 +10,7 @@ jobs:
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2.4
         with:
-          fileName: 'keystore/centinela.jks'
+          fileName: 'android/app/keystore/centinela.jks'
           encodedString: ${{ secrets.KEYSTORE }}
       - uses: actions/checkout@v4.1.1
       - name: Set up JDK 21
@@ -40,7 +40,6 @@ jobs:
           API_KEY_IOS: ${{ secrets.API_KEY_IOS }}
           API_KEY_ANDROID: ${{ secrets.API_KEY_ANDROID }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          PACKAGE_NAME: ${{ secrets.PACKAGE_NAME }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_ID_2: ${{ secrets.CLIENT_ID_2 }}
           CLIENT_ID_3: ${{ secrets.CLIENT_ID_3 }}
@@ -49,8 +48,6 @@ jobs:
           CERTIFICATE_HASH: ${{ secrets.CERTIFICATE_HASH }}
           DEBUG_CERTIFICATE_HASH: ${{ secrets.DEBUG_CERTIFICATE_HASH }}
           DEBUG_CLIENT_ID_3: ${{ secrets.DEBUG_CLIENT_ID_3 }}
-      - name: Print google-services.json (TO BE REMOVED)
-        run: cat android/app/google-services.json
       - name: Build APK
         run: flutter build apk --release
         env:
