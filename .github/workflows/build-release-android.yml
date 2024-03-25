@@ -62,8 +62,8 @@ jobs:
       - name: Move build outputs
         run: |
           mkdir -p Releases
-          mv android/build/app/outputs/app-release.apk Releases/
-          mv android/build/app/outputs/app-release.aab Releases/
+          mv android/build/app/outputs/flutter-apk/app-release.apk Releases/
+          mv android/build/app/outputs/flutter-apk/app-release.aab Releases/
       - name: Upload
         uses: actions/upload-artifact@v4.3.1
         with:
