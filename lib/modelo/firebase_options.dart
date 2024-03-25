@@ -58,6 +58,10 @@ class DefaultFirebaseOptions {
     projectId: 'custodes-97a6a',
     databaseURL: 'https://custodes-97a6a-default-rtdb.firebaseio.com',
     storageBucket: 'custodes-97a6a.appspot.com',
+    androidClientId:
+        '528581573998-7qop20tk8ocbbs573gb6c537rnit17gd.apps.googleusercontent.com',
+    iosClientId:
+        '528581573998-juacckc3inmo2ahh7kbt6llscnjgkamh.apps.googleusercontent.com',
     iosBundleId: 'com.centinela.custodes',
   );
 }

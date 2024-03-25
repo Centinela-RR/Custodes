@@ -62,10 +62,15 @@ jobs:
       - name: Move build outputs
         run: |
           mkdir -p Releases
-          mv build/app/outputs/flutter-apk/app-release.apk Releases/
-          mv build/app/outputs/bundle/release/app-release.aab Releases/
-      - name: Upload
+          mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk
+          mv build/app/outputs/bundle/release/app-release.aab Releases/Custodes.aab
+      - name: Upload APK
         uses: actions/upload-artifact@v4.3.1
         with:
-          name: Builds
-          path: Releases/
+          name: APK
+          path: Releases/Custodes.apk
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: Android App Bundle
+          path: Releases/Custodes.aab
