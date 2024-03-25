@@ -8,19 +8,20 @@ const xml2js = require('xml2js');
 const parser = new xml2js.Parser();
 const builder = new xml2js.Builder();
 const ipAddress = process.env.TEST_HOST ?? "localhost";
+const PACKAGE_NAME = 'com.centinela.custodes';
 
 // Define the 'unsafe' option
 const unsafe = process.env.npm_config_unsafe === 'true' || process.env.UNSAFE === 'true' || process.env.NODE_ENV === 'development';
 
 // iOS
 const ios = {
-  CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}.apps.googleusercontent.com`,
-  REVERSED_CLIENT_ID: `com.googleusercontent.apps.${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}`,
-  ANDROID_CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID3}.apps.googleusercontent.com`,
+  CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID_2}.apps.googleusercontent.com`,
+  REVERSED_CLIENT_ID: `com.googleusercontent.apps.${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID_2}`,
+  ANDROID_CLIENT_ID: `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID_3}.apps.googleusercontent.com`,
   API_KEY: process.env.API_KEY_IOS,
   GCM_SENDER_ID: process.env.GCM_SENDER_ID,
   PLIST_VERSION: '1',
-  BUNDLE_ID: process.env.PACKAGE_NAME,
+  BUNDLE_ID: PACKAGE_NAME,
   PROJECT_ID: process.env.PROJECT_ID,
   STORAGE_BUCKET: `${process.env.PROJECT_ID}.appspot.com`,
   IS_ADS_ENABLED: false,
@@ -45,22 +46,22 @@ const android = {
       "client_info": {
         "mobilesdk_app_id": `1:${process.env.GCM_SENDER_ID}:android:${process.env.SDK_APP_ID}`,
         "android_client_info": {
-          "package_name": process.env.PACKAGE_NAME
+          "package_name": PACKAGE_NAME
         }
       },
       "oauth_client": [
         {
           "android_info" : {
             "certificate_hash" : process.env.CERTIFICATE_HASH,
-            "package_name" : process.env.PACKAGE_NAME
+            "package_name" : PACKAGE_NAME
           },
-          "client_id" : `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID3}.apps.googleusercontent.com`,
+          "client_id" : `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID_3}.apps.googleusercontent.com`,
           "client_type" : 1
         },
         {
           "android_info" : {
             "certificate_hash" : process.env.DEBUG_CERTIFICATE_HASH,
-            "package_name" : process.env.PACKAGE_NAME
+            "package_name" : PACKAGE_NAME
           },
           "client_id" : `${process.env.GCM_SENDER_ID}-${process.env.DEBUG_CLIENT_ID_3}.apps.googleusercontent.com`,
           "client_type" : 1
@@ -83,10 +84,10 @@ const android = {
               "client_type": 3
             },
             {
-              "client_id": `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID2}.apps.googleusercontent.com`,
+              "client_id": `${process.env.GCM_SENDER_ID}-${process.env.CLIENT_ID_2}.apps.googleusercontent.com`,
               "client_type": 2,
               "ios_info": {
-                "bundle_id": process.env.PACKAGE_NAME
+                "bundle_id": PACKAGE_NAME
               }
             }
           ]
