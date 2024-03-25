@@ -35,6 +35,20 @@ jobs:
         run: flutter pub get
       - name: Fix garbage flutter_compass and make essential changes
         run: npm run build
+        env:
+          GCM_SENDER_ID: ${{ secrets.GCM_SENDER_ID }}
+          API_KEY_IOS: ${{ secrets.API_KEY_IOS }}
+          API_KEY_ANDROID: ${{ secrets.API_KEY_ANDROID }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          PACKAGE_NAME: ${{ secrets.PACKAGE_NAME }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_ID_2: ${{ secrets.CLIENT_ID_2 }}
+          CLIENT_ID_3: ${{ secrets.CLIENT_ID_3 }}
+          APP_ID: ${{ secrets.APP_ID }}
+          SDK_APP_ID: ${{ secrets.SDK_APP_ID }}
+          CERTIFICATE_HASH: ${{ secrets.CERTIFICATE_HASH }}
+          DEBUG_CERTIFICATE_HASH: ${{ secrets.DEBUG_CERTIFICATE_HASH }}
+          DEBUG_CLIENT_ID_3: ${{ secrets.DEBUG_CLIENT_ID_3 }}
       - name: Print google-services.json (TO BE REMOVED)
         run: cat android/app/google-services.json
       - name: Build APK
