@@ -29,9 +29,9 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   # Firebase stuff
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.17.3
-  cloud_firestore: ^4.15.3
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  cloud_firestore: ^4.15.9
 
   # Feedback: We should use this somehow
   # feedback: ^3.0.0
@@ -44,13 +44,12 @@ dependencies:
   
   # Splashscreen - Fácil de usar
   another_flutter_splash_screen: ^1.2.0
-  
+
   # Transiciones de pantalla actualmente no utilizadas
   page_transition: ^2.1.0
 
   # Seguridad
   uuid: ^4.3.3
-  flutter_dotenv: ^5.1.0
 
   # Formateador de texto para números de teléfono
   flutter_multi_formatter: ^2.12.4
@@ -72,7 +71,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - .env
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,0 +1,76 @@
+name: Build Release App Bundle
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1.2.4
+        with:
+          fileName: 'centinela.jks'
+          fileDir: './android/app/keystore/'
+          encodedString: ${{ secrets.KEYSTORE }}
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+      - name: Set up Node 20
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - uses: subosito/flutter-action@v2.14.0
+        with:
+          flutter-version: '3.19.4'
+          channel: stable
+      - name: Get dependencies
+        run: flutter pub get
+      - name: Fix garbage flutter_compass and make essential changes
+        run: npm run build
+        env:
+          GCM_SENDER_ID: ${{ secrets.GCM_SENDER_ID }}
+          API_KEY_IOS: ${{ secrets.API_KEY_IOS }}
+          API_KEY_ANDROID: ${{ secrets.API_KEY_ANDROID }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_ID_2: ${{ secrets.CLIENT_ID_2 }}
+          CLIENT_ID_3: ${{ secrets.CLIENT_ID_3 }}
+          APP_ID: ${{ secrets.APP_ID }}
+          SDK_APP_ID: ${{ secrets.SDK_APP_ID }}
+          CERTIFICATE_HASH: ${{ secrets.CERTIFICATE_HASH }}
+          DEBUG_CERTIFICATE_HASH: ${{ secrets.DEBUG_CERTIFICATE_HASH }}
+          DEBUG_CLIENT_ID_3: ${{ secrets.DEBUG_CLIENT_ID_3 }}
+      - name: Build APK
+        run: flutter build apk --release
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Build App Bundle
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: flutter build appbundle --release
+      - name: Move build outputs
+        run: |
+          mkdir -p Releases
+          mv build/app/outputs/flutter-apk/app-release.apk Releases/Custodes.apk
+          mv build/app/outputs/bundle/release/app-release.aab Releases/Custodes.aab
+      - name: Upload APK
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: APK
+          path: Releases/Custodes.apk
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: Android App Bundle
+          path: Releases/Custodes.aab
