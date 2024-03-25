@@ -29,8 +29,6 @@ jobs:
         with:
           flutter-version: '3.19.4'
           channel: stable
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:'
       - name: Get dependencies
         run: flutter pub get
       - name: Fix garbage flutter_compass and make essential changes
