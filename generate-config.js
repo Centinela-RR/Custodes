@@ -1,8 +1,12 @@
 const dotenv = require('dotenv');
 dotenv.config();
+const os = require('os');
 const fs = require('fs');
 const plist = require('plist');
 const path = require('path');
+const xml2js = require('xml2js');
+const parser = new xml2js.Parser();
+const builder = new xml2js.Builder();
 const ipAddress = process.env.TEST_HOST ?? "localhost";
 
 // Define the 'unsafe' option
@@ -107,15 +111,22 @@ const androidSecurityConfig = `
 const namespace = "namespace 'com.hemanthraj.fluttercompass'";
 
 // Define the path to the build.gradle file
-const gradleFilePath = 'ios/.symlinks/plugins/flutter_compass/android/build.gradle';
+const pubCacheDir = path.join(os.homedir(), '.pub-cache', 'hosted', 'pub.dev');
+const compassDir = fs.readdirSync(pubCacheDir).find(dir => dir.startsWith('flutter_compass'));
+
+if (!compassDir) {
+  console.error('Could not find flutter_compass directory');
+  process.exit(1);
+}
+
+const gradleFilePath = path.join(pubCacheDir, compassDir, 'android', 'build.gradle');
 
 // Define the pattern to match
 const pattern = /android \{\n    compileSdkVersion/g;
 
-// Check if the ios/.symlinks directory exists
-const iosSymlinksDir = 'ios/.symlinks';
-if (!fs.existsSync(iosSymlinksDir) || !fs.lstatSync(iosSymlinksDir).isDirectory()) {
-  console.log("ios/.symlinks directory does not exist or is not a directory. Ignoring.");
+// Check if the file exists
+if (!fs.existsSync(gradleFilePath) || fs.lstatSync(gradleFilePath).isDirectory()) {
+  console.log("The specified file does not exist or is not a file. Ignoring.");
 } else {
   // Read the existing content of the build.gradle file
   const gradleContent = fs.readFileSync(gradleFilePath, 'utf8');
@@ -133,6 +144,7 @@ if (!fs.existsSync(iosSymlinksDir) || !fs.lstatSync(iosSymlinksDir).isDirectory(
 
   if (updatedGradleContent) {
     fs.writeFileSync(gradleFilePath, updatedGradleContent);
+    console.log('Successfully updated the flutter_compass build.gradle file');
   }
 }
 
@@ -153,13 +165,47 @@ if (unsafe || !fs.existsSync('android/app/google-services.json')) {
 
 // Android Network Security Config
 const xmlFilePath = 'android/app/src/main/res/xml/network_security_config.xml';
-const xmlFileDir = path.dirname(xmlFilePath);
-
-// Check if the directory exists, if not, create it
-if (!fs.existsSync(xmlFileDir)) {
-  fs.mkdirSync(xmlFileDir, { recursive: true });
+if (process.env.DEBUG === 'true') {
+  const xmlFileDir = path.dirname(xmlFilePath);
+  
+  // Check if the directory exists, if not, create it
+  if (!fs.existsSync(xmlFileDir)) {
+    fs.mkdirSync(xmlFileDir, { recursive: true });
+  }
+  
+  if (unsafe || !fs.existsSync(xmlFilePath)) {
+    fs.writeFileSync(xmlFilePath, androidSecurityConfig);
+  }
+  
+} else {  
+  // Check if the file exists, if it does, delete it
+  if (fs.existsSync(xmlFilePath)) {
+    fs.unlinkSync(xmlFilePath);
+  }
+  
+  console.log('Skipping network_security_config.xml file generation for non-debug builds');
 }
 
-if (unsafe || !fs.existsSync(xmlFilePath)) {
-  fs.writeFileSync(xmlFilePath, androidSecurityConfig);
-}
+// Add the tag to the AndroidManifest.xml file
+const manifestFilePath = 'android/app/src/main/AndroidManifest.xml';
+// Check if the AndroidManifest.xml file exists, and if it does, read its content
+fs.readFile(manifestFilePath, 'utf-8', (err, data) => {
+  if (err) throw err;
+
+  parser.parseString(data, (err, result) => {
+    if (err) throw err;
+
+    const application = result['manifest']['application'][0]['$'];
+
+    if (process.env.DEBUG === 'true') {
+      application['android:networkSecurityConfig'] = '@xml/network_security_config';
+    } else {
+      delete application['android:networkSecurityConfig'];
+    }
+
+    const xml = builder.buildObject(result);
+    fs.writeFile(manifestFilePath, xml, (err) => {
+      if (err) throw err;
+    });
+  });
+});
